@@ -42,6 +42,11 @@
     gap: 12px;
   }
 
+  .tooltip-wrap { position: relative; display: inline-flex; align-items: center; gap: 5px; }
+  .tooltip-icon { width: 14px; height: 14px; border-radius: 50%; background: var(--border); color: var(--text-muted); font-size: 9px; font-family: IBM Plex Mono, monospace; display: inline-flex; align-items: center; justify-content: center; cursor: help; }
+  .tooltip-icon:hover + .tooltip-box { display: block; }
+  .tooltip-box { display: none; position: absolute; top: -8px; left: calc(100% + 8px); background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 8px 12px; font-size: 11px; color: var(--text-muted); white-space: nowrap; z-index: 100; }
+
   .logo {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 13px;
@@ -617,9 +622,15 @@ function renderResponse(data) {
   // Meta card
   const metaCard = document.createElement('div');
   metaCard.className = 'meta-card';
-  metaCard.innerHTML = `
+metaCard.innerHTML = `
     <div class="meta-stat">
-      <span class="meta-value">${meta.total_trials_retrieved.toLocaleString()}</span>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span class="meta-value">${meta.total_trials_retrieved.toLocaleString()}</span>
+        <span class="tooltip-wrap">
+          <span class="tooltip-icon">i</span>
+          <span class="tooltip-box" style="bottom:auto;top:calc(100% + 8px);">Capped at 250 trials for speed. Future versions will support larger datasets.</span>
+        </span>
+      </div>
       <span class="meta-label">Trials retrieved</span>
     </div>
     <div class="meta-stat">

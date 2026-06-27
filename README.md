@@ -213,8 +213,9 @@ The ClinicalTrials.gov client uses requests (not httpx — the site blocks httpx
 5. **Structured logging with trace IDs** — each request should carry a trace ID through all log lines for debuggability in production.
 6. **Dynamic histogram bucketing** — currently enrollment buckets are defined statically. Dynamic bucketing based on the actual data distribution would be more statistically meaningful.
 7. **Add optional fields to UI** - currently the optional fields like drug name, start year etc. can only be passed into the API but there's no provision for the user to do that from the UI itself, I'd add that
-8. **Note for points 3 and 8** - these are basically to say that I can add additional maps and better functionality to map making, I tried to keep everything within a certain MVP-esque scope for a 6 hour assignment
-9. **Something to think about** -- a local trial database with scheduled sync — every query hits the ClinicalTrials.gov API live, adding 1-3 seconds of latency per request. A local PostgreSQL database synced nightly via cron would drop that to under 100ms — the biggest single performance win available.
+8. **Add pagination to the UI** - right now, for performance issues I cap everything at the top 250 data points, I'd like to extend this allow the user to be able to see the entire thing (with some delay as the AI makes sense of things) or pagination to the UI so they can see 0-250, 251-500...
+9. **Note for points 3 and 8** - these are basically to say that I can add additional maps and better functionality to map making, I tried to keep everything within a certain MVP-esque scope for a 6 hour assignment
+10. **Something to think about** -- a local trial database with scheduled sync — every query hits the ClinicalTrials.gov API live, adding 1-3 seconds of latency per request. A local PostgreSQL database synced nightly via cron would drop that to under 100ms — the biggest single performance win available.
 Tradeoff: newly registered trials would show up with up to 24 hours delay. Acceptable for researchers doing analysis, not for patients searching for active recruiting studies.
 
 ---
