@@ -1,3 +1,14 @@
+![alt text](image.png)
+
+
+![alt text](image-1.png)
+
+
+![alt text](image-2.png)
+
+
+![alt text](image-3.png)
+
 # ClinicalTrials Query-to-Visualization Agent
 
 A FastAPI backend that converts natural language questions about clinical trials into structured visualization specifications, backed by real-time [ClinicalTrials.gov](https://clinicaltrials.gov/data-api/api) data. Includes a lightweight frontend UI with live streaming progress.
