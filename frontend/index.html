@@ -222,14 +222,37 @@
   }
 
   .meta-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 20px 24px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-  }
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr)) auto;
+  gap: 16px;
+  align-items: center;
+}
+
+  .observability-btn {
+  justify-self: end;
+  align-self: center;
+  padding: 10px 14px;
+  background: var(--success);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.15s;
+  white-space: nowrap;
+}
+
+.observability-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
 
   .meta-stat { display: flex; flex-direction: column; gap: 4px; }
 
@@ -471,6 +494,10 @@ const API_BASE = 'http://localhost:8000';
 let chartInstance = null;
 let allCitations = [];
 
+function openObservability() {
+  window.open(`${API_BASE}/traces`, '_blank');
+}
+
 function setStatus(state, text, tags = []) {
   const dot = document.getElementById('status-dot');
   const statusText = document.getElementById('status-text');
@@ -645,6 +672,10 @@ metaCard.innerHTML = `
       <span class="meta-value">${allCitations.length}</span>
       <span class="meta-label">Citations</span>
     </div>
+
+    <button class="observability-btn" onclick="openObservability()">
+      Observability
+    </button>
   `;
   area.appendChild(metaCard);
 

@@ -1,13 +1,12 @@
-![alt text](image.png)
+![alt text](image-4.png)
 
+![alt text](image-5.png)
 
-![alt text](image-1.png)
+![alt text](image-6.png)
 
+![alt text](image-7.png)
 
-![alt text](image-2.png)
-
-
-![alt text](image-3.png)
+![alt text](image-8.png)
 
 # ClinicalTrials Query-to-Visualization Agent
 
@@ -31,7 +30,8 @@ cp .env.example .env
 # Live mode (hits real ClinicalTrials.gov API)
 python -m uvicorn app.main:app --reload
 
-# Mock mode (synthetic CT data, still uses real OpenAI API)
+# Mock mode (synthetic CT data, still uses real OpenAI API) - Made for initial pre UI testing to check if everything was working correctly
+# PLEASE FEEL FREE TO IGNORE
 MOCK_MODE=true python -m uvicorn app.main:app --reload
 ```
 
@@ -62,6 +62,9 @@ Standard request/response. Returns the full visualization spec as JSON.
 ### POST `/query/stream`
 
 Streaming version using Server-Sent Events. Emits live progress events during agent execution, then the final result. Used by the frontend UI.
+
+### GET `/traces`
+Returns all stored request traces. Each trace captures every step (normalization, planning, tool calls, assembly) with inputs, outputs, and timing. In production, forward to Datadog or CloudWatch via structured logging.
 
 **Request**
 
@@ -228,6 +231,7 @@ The ClinicalTrials.gov client uses requests (not httpx — the site blocks httpx
 9. **Note for points 3, 4 and 8** - these are basically to say that I can add additional maps and better functionality to map making, I tried to keep everything within a certain MVP-esque scope for a 6 hour assignment
 10. **Something to think about** -- a local trial database with scheduled sync — every query hits the ClinicalTrials.gov API live, adding 1-3 seconds of latency per request. A local PostgreSQL database synced nightly via cron would drop that to under 100ms — the biggest single performance win available.
 Tradeoff: newly registered trials would show up with up to 24 hours delay. Acceptable for researchers doing analysis, not for patients searching for active recruiting studies.
+11. **Cloud observability** — request traces are currently stored in-memory and exposed at `/traces`. In production these would be forwarded to Datadog or AWS CloudWatch via a structured logging sidecar, enabling dashboards, alerts, and cross-request search.
 
 ---
 

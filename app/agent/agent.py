@@ -30,6 +30,7 @@ import asyncio
 from openai import OpenAI
 
 from app.agent.normalizer import normalize_request_entities
+from app.observability import new_trace, StepTrace, Timer
 from app.client.ct_client import ClinicalTrialsClient
 from app.schemas.agent import AgentPlan, ExtractedFilters, IntentType, INTENT_VIZ_MAP
 from app.schemas.ct_api import CTStudy
@@ -193,16 +194,24 @@ class TrialsAgent:
         Main entry point. Runs the full plan -> tool loop -> assemble pipeline.
         """
         self.progress_queue = progress_queue
+        self.trace = new_trace(request.query)
         logger.info(f"Agent starting for query: {request.query[:80]}")
 
         await self.emit("Planning query...", "Interpreting: " + request.query[:60])
 
         # Step 0: Normalize entity names before planning
-        _, norm_drug, norm_condition = await normalize_request_entities(
-            request.query,
-            request.drug_name,
-            request.condition,
-        )
+        with Timer() as t:
+            _, norm_drug, norm_condition = await normalize_request_entities(
+                request.query,
+                request.drug_name,
+                request.condition,
+            )
+        self.trace.add_step(StepTrace(
+            step="normalization",
+            input={"drug_name": request.drug_name, "condition": request.condition},
+            output={"drug_name": norm_drug, "condition": norm_condition},
+            duration_ms=t.elapsed_ms,
+        ))
         if norm_drug != request.drug_name or norm_condition != request.condition:
             await self.emit(
                 "Entity normalization",
@@ -215,9 +224,18 @@ class TrialsAgent:
             })
 
         # Step 1: Plan
-        plan = await self._plan(request)
+        with Timer() as t:
+            plan = await self._plan(request)
         logger.info(f"Plan: intent={plan.intent}, viz={plan.viz_type}, field={plan.aggregation_field}")
-
+        self.trace.intent = str(plan.intent)
+        self.trace.viz_type = str(plan.viz_type)
+        self.trace.fallback_used = plan.reasoning == "Rule-based fallback plan used due to LLM parsing failure."
+        self.trace.add_step(StepTrace(
+            step="planning",
+            input={"model": "gpt-4.1-mini"},
+            output={"intent": str(plan.intent), "viz_type": str(plan.viz_type), "aggregation_field": plan.aggregation_field},
+            duration_ms=t.elapsed_ms,
+        ))
         await self.emit("Plan complete", "Intent: " + str(plan.intent) + " - Viz: " + str(plan.viz_type) + " - Field: " + str(plan.aggregation_field))
 
         # Step 2: Agentic tool loop
@@ -225,7 +243,15 @@ class TrialsAgent:
 
         # Step 3: Assemble final response
         await self.emit("Building visualization...", "Assembling chart spec")
-        response = self._assemble_response(request, plan, viz_data, tool_calls_made, raw_studies)
+        with Timer() as t:
+            response = self._assemble_response(request, plan, viz_data, tool_calls_made, raw_studies)
+        self.trace.add_step(StepTrace(
+            step="assembly",
+            input={"viz_type": str(plan.viz_type)},
+            output={"data_points": len(viz_data)},
+            duration_ms=t.elapsed_ms,
+        ))
+        self.trace.complete("success")
         return response
 
     # ------------------------------------------------------------------
@@ -447,8 +473,15 @@ class TrialsAgent:
                 label = tool_input.pop("studies_key", "primary")
                 filters_desc = ", ".join(str(k) + "=" + str(v) for k, v in tool_input.items() if v)
                 await self.emit("Searching ClinicalTrials.gov...", filters_desc or "Fetching trials")
-                studies = await search_trials(ct_client, **tool_input)
+                with Timer() as t:
+                    studies = await search_trials(ct_client, **tool_input)
                 study_store[label] = studies
+                self.trace.add_step(StepTrace(
+                    step="tool_call",
+                    input={"tool": "search_trials", "filters": tool_input},
+                    output={"result_count": len(studies), "label": label},
+                    duration_ms=t.elapsed_ms,
+                ))
                 await self.emit("Retrieved " + str(len(studies)) + " trials", "Search complete for " + label + " query")
                 return {
                     "studies_key": label,
@@ -464,18 +497,33 @@ class TrialsAgent:
                 field = tool_input.get("field", "phase")
                 studies = study_store.get(studies_key, study_store.get("primary", []))
                 await self.emit("Aggregating " + str(len(studies)) + " trials...", "Grouping by " + field)
-                result = aggregate(
-                    studies=studies,
-                    field=field,
-                    top_n=tool_input.get("top_n"),
-                    label=tool_input.get("label"),
-                )
+                with Timer() as t:
+                    result = aggregate(
+                        studies=studies,
+                        field=field,
+                        top_n=tool_input.get("top_n"),
+                        label=tool_input.get("label"),
+                    )
+                self.trace.add_step(StepTrace(
+                    step="tool_call",
+                    input={"tool": "aggregate", "field": field},
+                    output={"result_count": len(result)},
+                    duration_ms=t.elapsed_ms,
+                ))
                 await self.emit("Aggregation complete", str(len(result)) + " data points produced")
                 return result
 
             case "get_study_details":
                 await self.emit("Fetching citation details...", tool_input["nct_id"])
-                return await get_study_details(ct_client, tool_input["nct_id"])
+                with Timer() as t:
+                    result = await get_study_details(ct_client, tool_input["nct_id"])
+                self.trace.add_step(StepTrace(
+                    step="tool_call",
+                    input={"tool": "get_study_details", "nct_id": tool_input["nct_id"]},
+                    output={"found": result is not None},
+                    duration_ms=t.elapsed_ms,
+                ))
+                return result
 
             case _:
                 logger.warning("Unknown tool: " + tool_name)

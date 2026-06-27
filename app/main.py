@@ -11,6 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 
 from app.agent.agent import TrialsAgent
+from app.observability import get_traces, get_trace
 from app.schemas.request import QueryRequest
 from app.schemas.response import QueryResponse
 
@@ -111,6 +112,25 @@ async def query_stream(request: QueryRequest):
         media_type="text/event-stream",
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
+
+
+@app.get("/traces")
+async def traces():
+    """
+    Returns all stored request traces for observability.
+    In production, forward these to Datadog, Prometheus, or a log aggregator.
+    Stored in-memory — resets on server restart. Max 100 traces retained.
+    """
+    return {"traces": get_traces(), "count": len(get_traces())}
+
+
+@app.get("/traces/{request_id}")
+async def trace(request_id: str):
+    """Returns a single trace by request_id."""
+    t = get_trace(request_id)
+    if not t:
+        raise HTTPException(status_code=404, detail="Trace not found")
+    return t
 
 
 @app.get("/schema/request")
