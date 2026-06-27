@@ -1,21 +1,14 @@
 # ClinicalTrials Query-to-Visualization Agent
 
-A FastAPI backend that converts natural language questions about clinical trials into structured visualization specifications, backed by real-time [ClinicalTrials.gov](https://clinicaltrials.gov/data-api/api) data.
+A FastAPI backend that converts natural language questions about clinical trials into structured visualization specifications, backed by real-time [ClinicalTrials.gov](https://clinicaltrials.gov/data-api/api) data. Includes a lightweight frontend UI with live streaming progress.
 
 ---
 
 ## How to Run
 
-### Prerequisites
-
-- Python 3.12+
-- An OpenAI API key
-
 ### Install
 
 ```bash
-git clone https://github.com/utkarshsingh26/Clinical_Trials_Agent.git
-cd Clinical_Trials_Agent
 pip install -r requirements.txt
 cp .env.example .env
 # Edit .env and set OPENAI_API_KEY=your_key_here
@@ -25,19 +18,23 @@ cp .env.example .env
 
 ```bash
 # Live mode (hits real ClinicalTrials.gov API)
-uvicorn app.main:app --reload
+python -m uvicorn app.main:app --reload
 
-# Mock mode (synthetic CT data, still uses real Anthropic API)
-MOCK_MODE=true uvicorn app.main:app --reload
+# Mock mode (synthetic CT data, still uses real OpenAI API)
+MOCK_MODE=true python -m uvicorn app.main:app --reload
 ```
 
 Server runs at `http://localhost:8000`. Docs at `http://localhost:8000/docs`.
+
+### Open the frontend
+
+Open `frontend/index.html` directly in your browser. No separate server needed.
 
 ### Run example queries
 
 ```bash
 # With real data
-OPENAI_API_KEY=your_key python examples/run_examples.py
+python examples/run_examples.py
 
 # With mock CT data
 MOCK_MODE=true python examples/run_examples.py
@@ -49,20 +46,24 @@ MOCK_MODE=true python examples/run_examples.py
 
 ### POST `/query`
 
+Standard request/response. Returns the full visualization spec as JSON.
+
+### POST `/query/stream`
+
+Streaming version using Server-Sent Events. Emits live progress events during agent execution, then the final result. Used by the frontend UI.
+
 **Request**
 
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `query` | string | Yes | Natural language question about clinical trials |
-| `drug_name` | string | No | Drug/intervention name hint |
+| `drug_name` | string | No | Drug/intervention name hint — reduces LLM parsing burden |
 | `condition` | string | No | Disease/condition hint |
-| `trial_phase` | string | No | Phase filter (PHASE1–PHASE4, EARLY_PHASE1, NA) |
+| `trial_phase` | string | No | Phase filter (PHASE1-PHASE4, EARLY_PHASE1, NA) |
 | `sponsor` | string | No | Sponsor organization name |
 | `country` | string | No | Country filter |
 | `start_year` | integer | No | Filter trials starting on or after this year |
 | `end_year` | integer | No | Filter trials starting on or before this year |
-
-Optional structured fields reduce LLM parsing burden and improve accuracy on specific identifiers like drug names.
 
 **Example request**
 
@@ -74,7 +75,7 @@ Optional structured fields reduce LLM parsing burden and improve accuracy on spe
 }
 ```
 
-**Response**
+**Example response**
 
 ```json
 {
@@ -102,9 +103,9 @@ Optional structured fields reduce LLM parsing burden and improve accuracy on spe
     ]
   },
   "meta": {
-    "query_interpretation": "User asked about change over time — trend intent maps to time_series.",
+    "query_interpretation": "User asked about change over time, trend intent maps to time_series.",
     "filters_applied": { "drug_name": "Pembrolizumab", "start_year": 2015 },
-    "total_trials_retrieved": 247,
+    "total_trials_retrieved": 250,
     "assumptions": [],
     "tool_calls_made": 2,
     "source": "clinicaltrials.gov"
@@ -113,7 +114,7 @@ Optional structured fields reduce LLM parsing burden and improve accuracy on spe
     "intent": "trend",
     "viz_type": "time_series",
     "aggregation_field": "start_year",
-    "reasoning": "...",
+    "reasoning": "User asked about change over time, trend maps to time_series aggregated by year.",
     "requires_multiple_searches": false,
     "filters": { "drug_name": "Pembrolizumab", "start_year": 2015 }
   }
@@ -128,91 +129,116 @@ Full JSON schemas available at `/schema/request` and `/schema/response`.
 
 | Type | Intent | Example query |
 |---|---|---|
-| `bar_chart` | Distribution / Summary | "How are lung cancer trials distributed across phases?" |
+| `time_series` | Trend | "How has the number of Pembrolizumab trials changed per year since 2015?" |
+| `bar_chart` | Distribution / Geographic | "How are lung cancer trials distributed across phases?" |
 | `grouped_bar_chart` | Comparison | "Compare phases for Pembrolizumab vs Nivolumab" |
-| `time_series` | Trend | "How has the number of Pembrolizumab trials changed per year?" |
-| `histogram` | Distribution | "What's the enrollment size distribution for Phase 3 trials?" |
-| `network_graph` | Relationships | "Show a network of sponsors and conditions for breast cancer" |
+| `histogram` | Enrollment distribution | "What is the enrollment size distribution for Phase 3 cancer trials?" |
+| `pie_chart` | Proportional breakdown | "What are the most common sponsor types for oncology trials?" |
+| `network_graph` | Relationships | "Show a network of sponsors and conditions for breast cancer trials" |
 
 ---
 
 ## Key Design Decisions
 
-### 1. Forced planning step before tool calls
+### 1. Three-stage pipeline: Plan, Tool Loop, Deterministic Assembly
 
-The agent produces a validated `AgentPlan` (intent, viz_type, filters, aggregation_field) before making any API calls. This plan is validated with Pydantic — including a compatibility check between intent and viz_type. If the LLM produces an incompatible combination (e.g. `network_graph` for a trend query), the system falls back to the correct type rather than propagating the error. This is the primary hallucination guard.
+Every request goes through three distinct stages. The LLM is only involved in stages 1 and 2. Stage 3 (assembling the VisualizationSpec) is deterministic Python code — the LLM never generates the final JSON schema. This prevents hallucinated field names and schema drift.
 
-### 2. Raw OpenAI SDK, no framework
+### 2. Forced planning step with strict JSON schema
 
-The agentic loop is implemented directly against the Anthropic messages API with explicit message history management. No LangChain or LangGraph. This keeps the control flow transparent, the state explicit, and the debugging tractable. The loop is ~50 lines of code that are easy to reason about.
+Before any tool calls, the agent produces a validated AgentPlan using OpenAI's json_schema response format with strict: true. This constrains the LLM at the token level — intent can only be one of 6 exact strings, viz_type one of 7, aggregation_field one of 9. Invalid enum values are structurally impossible, not just filtered after the fact.
 
-### 3. Hard cap of 5 tool calls per request
+### 3. Few-shot examples in the plan prompt
 
-The agent loop is bounded at `MAX_TOOL_CALLS = 5`. For this domain, every query type is answerable in 2–3 tool calls (search → aggregate, or search → search → aggregate for comparisons). The cap prevents runaway execution and ensures predictable latency. It maps directly to the rubric's "include validation or constraints" criterion.
+The planning system prompt includes 5 concrete query to plan examples covering every intent type. The LLM pattern-matches against these rather than reasoning from scratch, which significantly reduces intent misclassification.
 
-### 4. Deterministic visualization assembly
+### 4. Retry-on-failure planning
 
-The `VisualizationSpec` is built from the plan + aggregated data in Python code, not by parsing LLM-generated JSON. The LLM decides intent and viz_type (upfront, in the planning step), but the schema construction is deterministic. This prevents hallucinated field names and schema drift.
+If Pydantic validation fails on the plan output, the error message is sent back to the LLM with a re-prompt request before falling back to rule-based planning. One retry loop catches most edge cases without abandoning the LLM reasoning entirely.
 
-### 5. Coarse-grained tools
+### 5. Entity normalization before planning
 
-Three tools: `search_trials`, `aggregate`, `get_study_details`. Coarse granularity means the LLM makes fewer decisions, each of which is easier to validate. Fine-grained tools would give the LLM more surface area for invalid combinations.
+Drug brand names and condition abbreviations are resolved to canonical forms before reaching the planner. "keytruda" becomes "Pembrolizumab", "T2D" becomes "type 2 diabetes". Uses a local dictionary for common cases and the ClinicalTrials.gov autocomplete API as a fallback. Eliminates synonym ambiguity at the source.
 
-### 6. Discriminated union encoding
+### 6. Raw OpenAI SDK, no framework
 
-`VisualizationSpec.encoding` is a Pydantic discriminated union on `encoding_type`: either `CartesianEncoding` (x/y/series for bar/line/scatter) or `NetworkEncoding` (nodes/edges for graph). This means a frontend can branch cleanly on `encoding.encoding_type` with full type safety rather than doing duck-typing on the encoding object.
+The agentic loop is implemented directly against the OpenAI chat completions API with explicit message history management. No LangChain or LangGraph. The loop is ~50 lines of code that are easy to reason about, debug, and extend.
 
-### 7. Deep citations baked into every data point
+### 7. Hard cap of 5 tool calls per request
 
-Each aggregated data point includes up to 3 `Citation` objects with `nct_id`, text `excerpt`, `field_name`, and `url`. Citations are built during aggregation from actual API response text — they are never generated by the LLM.
+The agent loop is bounded at MAX_TOOL_CALLS = 5. Every query type is answerable in 2-3 tool calls (search, aggregate, or search, search, aggregate for comparisons). The cap prevents runaway execution and ensures predictable latency.
+
+### 8. Coarse-grained tools
+
+Three tools: search_trials, aggregate, get_study_details. Coarse granularity means the LLM makes fewer decisions per request, each easier to validate. Fine-grained tools would give the LLM more surface area for invalid combinations.
+
+### 9. Discriminated union encoding
+
+VisualizationSpec.encoding is a Pydantic discriminated union on encoding_type: either CartesianEncoding (x/y/series) or NetworkEncoding (nodes/edges). A frontend can branch cleanly on encoding.encoding_type with full type safety.
+
+### 10. Deep citations on every data point
+
+Each aggregated data point includes up to 3 Citation objects with nct_id, text excerpt, field name, and URL. Citations come from actual API response text, never generated by the LLM.
+
+### 11. Live streaming progress via SSE
+
+The /query/stream endpoint uses Server-Sent Events to stream agent progress in real time. Each tool call emits a progress event (planning, searching, aggregating) that the frontend renders as a live step-by-step loading screen before the chart appears.
+
+### 12. Performance-tuned CT API client
+
+The ClinicalTrials.gov client uses requests (not httpx — the site blocks httpx via TLS fingerprinting) run in a thread pool executor to keep the async interface. Page size is capped at 250 with a single page fetch by default, balancing data quality against latency. The planning step uses gpt-4.1-mini for speed; the tool loop uses gpt-4.1.
 
 ---
 
 ## Tradeoffs
 
-**Coarse tools vs fine-grained tools:** Coarse tools mean the agent can't do partial aggregations or field-level filtering during aggregation. We compensate with `top_n` and `label` params on aggregate.
+**Sample size vs latency:** I fetch 250 trials per search (1 page) rather than paginating to 1000+. This makes responses ~5x faster but means patterns are based on a sample. For most analytical questions 250 trials is sufficient to show the distribution; for rare conditions it may undercount.
 
-**Deterministic viz assembly vs LLM-generated spec:** We lose flexibility for novel query types that don't fit our intent taxonomy. We gain reliability and schema correctness.
+**Coarse tools vs fine-grained:** Coarse tools limit partial aggregations and field-level filtering. Compensated with top_n and label params on aggregate.
 
-**5-call cap:** Deeply nested comparison queries (3+ entities) can't be fully explored. This is an acceptable tradeoff given the query types in scope.
+**Deterministic assembly vs LLM-generated spec:** Loses flexibility for novel query types outside the intent taxonomy. Gains reliability and schema correctness.
 
-**Single-pass planning:** The plan is produced in one LLM call and not revised during execution. If the initial plan is wrong, the output will be wrong. A future version could add a reflection step after tool results come in.
+**5-call cap:** Deeply nested comparison queries (3+ entities) cannot be fully explored.
+
+**Single-pass planning with retry:** The plan is produced in one LLM call (with one retry on failure), not revised iteratively during execution. If both fail, the rule-based fallback kicks in.
 
 ---
 
 ## What I Would Improve With More Time
 
-1. **Streaming responses** — the `/query` endpoint blocks until the full agent loop completes. Server-sent events would let the frontend show progress.
-2. **Caching** — identical search params should cache CT API results for the session to avoid redundant network calls and reduce latency.
-3. **Richer scatter plots** — enrollment vs. start_year scatter with phase as color would be a meaningful addition for studying trial growth patterns.
-4. **Multi-condition network graphs** — currently the network shows sponsor-condition links. Extending to drug-drug co-occurrence networks would require a second aggregation pass.
-5. **Plan revision** — after the first search returns results, a second LLM call could revise the plan based on what data was actually available, catching cases where the original intent was mismatched to the data.
-6. **Structured logging with trace IDs** — each request should carry a trace ID through all log lines for debuggability in production.
+1. **Caching** — identical search params should cache CT API results for the session to avoid redundant network calls on repeated or similar queries.
+2. **Plan revision after search** — after the first search returns results, a second LLM call could revise the plan based on what data was actually available, catching cases where the original intent was mismatched to the data.
+3. **Choropleth map** — geographic trial density by country rendered on an actual map rather than a bar chart. Would need Leaflet or D3.
+4. **Drug-drug co-occurrence network** — extending the network graph to show which drugs frequently appear together in combination studies.
+5. **Structured logging with trace IDs** — each request should carry a trace ID through all log lines for debuggability in production.
+6. **Dynamic histogram bucketing** — currently enrollment buckets are defined statically. Dynamic bucketing based on the actual data distribution would be more statistically meaningful.
+7. **Add optional fields to UI** - currently the optional fields like drug name, start year etc. can only be passed into the API but there's no provision for the user to do that from the UI itself, I'd add that
+8. **Note for points 3 and 8** - these are basically to say that I can add additional maps and better functionality to map making, I tried to keep everything within a certain MVP-esque scope for a 6 hour assignment
+9. **Something to think about** -- a local trial database with scheduled sync — every query hits the ClinicalTrials.gov API live, adding 1-3 seconds of latency per request. A local PostgreSQL database synced nightly via cron would drop that to under 100ms — the biggest single performance win available.
+Tradeoff: newly registered trials would show up with up to 24 hours delay. Acceptable for researchers doing analysis, not for patients searching for active recruiting studies.
 
 ---
 
 ## AI Tools Used
 
-- **Claude (Anthropic)** — used for query planning and tool orchestration within the agent itself
-- **Claude (claude.ai)** — used as a coding assistant during development for schema design, agent architecture, and code review
+- **OpenAI gpt-4.1 / gpt-4.1-mini** — used within the agent for query planning and tool orchestration
+- **Claude (claude.ai)** — used as a coding assistant for help with development
 
 ### What I designed deliberately
 
-- The three-layer architecture (plan → tool loop → deterministic assembly)
-- The forced planning step as a hallucination guard
-- The discriminated union encoding schema
+- The three-stage pipeline architecture (plan, tool loop, deterministic assembly)
+- The forced planning step as the primary hallucination guard
+- Using strict JSON schema and few-shot examples to constrain LLM output at the token level
+- The entity normalization step before planning to eliminate synonym ambiguity
+- The retry-on-failure mechanism before falling back to rule-based planning
+- The discriminated union encoding schema for frontend type safety
 - The MAX_TOOL_CALLS bound and its justification
-- The decision to build VisualizationSpec in code rather than parsing LLM JSON
-
-### What I generated and adapted
-
-- Boilerplate FastAPI middleware and CORS setup
-- The mock data generator for testing
-- The `from_api_response()` parser for CT API's nested JSON structure
+- Switching from httpx to requests after discovering TLS fingerprinting blocks
 
 ### How I validated correctness
 
 - Pydantic validation on every input/output boundary
-- Direct unit tests on tool functions (aggregate, citations)
-- End-to-end tests against mock CT data
-- Schema endpoint tests confirming FastAPI serialization matches expected structure
+- Intent/viz_type compatibility check with rule-based fallback
+- Direct unit tests on tool functions (aggregate, citations, enrollment bucketing)
+- End-to-end tests against mock CT data before switching to live API
+- Manual verification of all 6 visualization types against real ClinicalTrials.gov data
