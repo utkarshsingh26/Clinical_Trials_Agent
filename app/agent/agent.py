@@ -39,6 +39,7 @@ from app.schemas.visualization import (
     NodeDef,
     EdgeDef,
 )
+from app.agent.normalizer import normalize_request_entities
 from app.tools.tools import (
     search_trials,
     aggregate,
@@ -168,6 +169,23 @@ class TrialsAgent:
 
         await self.emit("Planning query...", "Interpreting: " + request.query[:60])
 
+        # Step 0: Normalize entity names before planning
+        _, norm_drug, norm_condition = await normalize_request_entities(
+            request.query,
+            request.drug_name,
+            request.condition,
+        )
+        if norm_drug != request.drug_name or norm_condition != request.condition:
+            await self.emit(
+                "Entity normalization",
+                f"{'Drug: ' + request.drug_name + ' -> ' + norm_drug if norm_drug != request.drug_name else ''}"
+                + f"{'Condition: ' + request.condition + ' -> ' + norm_condition if norm_condition != request.condition else ''}"
+            )
+            request = request.model_copy(update={
+                "drug_name": norm_drug,
+                "condition": norm_condition,
+            })
+
         # Step 1: Plan
         plan = await self._plan(request)
         logger.info(f"Plan: intent={plan.intent}, viz={plan.viz_type}, field={plan.aggregation_field}")
@@ -232,7 +250,66 @@ class TrialsAgent:
             return plan
 
         except Exception as e:
-            logger.warning(f"Plan parsing failed ({e}), using rule-based fallback")
+            logger.warning(f"Plan parsing failed ({e}), retrying with error context")
+            return await self._retry_plan(request, context, str(e))
+
+    async def _retry_plan(self, request: QueryRequest, original_context: str, error: str) -> AgentPlan:
+        """
+        Re-prompt the LLM with the validation error to get a corrected plan.
+        Falls back to rule-based planning if the retry also fails.
+        """
+        retry_context = original_context + chr(10) + chr(10) + 'Your previous response failed validation with this error: ' + error + chr(10) + 'Please fix the plan and return valid JSON matching the required schema exactly.'
+        try:
+            response = self.client.chat.completions.create(
+                model="gpt-4.1-mini",
+                max_tokens=1000,
+                messages=[
+                    {"role": "system", "content": PLAN_SYSTEM_PROMPT},
+                    {"role": "user", "content": retry_context},
+                ],
+                response_format={
+                    "type": "json_schema",
+                    "json_schema": {
+                        "name": "agent_plan",
+                        "strict": True,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "intent": {"type": "string", "enum": ["trend", "distribution", "comparison", "geographic", "network", "summary"]},
+                                "viz_type": {"type": "string", "enum": ["bar_chart", "grouped_bar_chart", "time_series", "scatter", "histogram", "network_graph", "pie_chart"]},
+                                "filters": {
+                                    "type": "object",
+                                    "properties": {
+                                        "drug_name": {"type": ["string", "null"]},
+                                        "condition": {"type": ["string", "null"]},
+                                        "trial_phase": {"type": ["string", "null"]},
+                                        "sponsor": {"type": ["string", "null"]},
+                                        "country": {"type": ["string", "null"]},
+                                        "start_year": {"type": ["integer", "null"]},
+                                        "end_year": {"type": ["integer", "null"]},
+                                        "secondary_drug": {"type": ["string", "null"]},
+                                        "secondary_condition": {"type": ["string", "null"]}
+                                    },
+                                    "required": ["drug_name", "condition", "trial_phase", "sponsor", "country", "start_year", "end_year", "secondary_drug", "secondary_condition"],
+                                    "additionalProperties": False
+                                },
+                                "aggregation_field": {"type": "string", "enum": ["phase", "status", "sponsor_name", "sponsor_class", "start_year", "country", "condition", "intervention", "enrollment_bucket"]},
+                                "reasoning": {"type": "string"},
+                                "requires_multiple_searches": {"type": "boolean"}
+                            },
+                            "required": ["intent", "viz_type", "filters", "aggregation_field", "reasoning", "requires_multiple_searches"],
+                            "additionalProperties": False
+                        }
+                    }
+                },
+            )
+            raw = response.choices[0].message.content.strip()
+            plan_dict = json.loads(raw)
+            plan = AgentPlan(**plan_dict)
+            logger.info("Retry plan succeeded")
+            return plan
+        except Exception as e2:
+            logger.warning(f"Retry plan also failed ({e2}), using rule-based fallback")
             return self._fallback_plan(request)
 
     def _fallback_plan(self, request: QueryRequest) -> AgentPlan:
