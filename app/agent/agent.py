@@ -83,7 +83,25 @@ Intent to viz_type rules:
 - For sponsor type/class breakdown queries, use distribution intent with viz_type="pie_chart" and aggregation_field="sponsor_class".
 
 Be conservative: if unsure between network and distribution, choose distribution.
-For enrollment/size/distribution queries, use histogram intent with aggregation_field="enrollment_bucket"."""
+For enrollment/size/distribution queries, use histogram intent with aggregation_field="enrollment_bucket".
+For sponsor type/class breakdown queries, use distribution intent with viz_type="pie_chart" and aggregation_field="sponsor_class".
+
+Examples of correct plans:
+
+Query: "How has the number of trials for Pembrolizumab changed per year since 2015?"
+Plan: {"intent": "trend", "viz_type": "time_series", "filters": {"drug_name": "Pembrolizumab", "start_year": 2015}, "aggregation_field": "start_year", "reasoning": "User asks about change over time, trend maps to time_series aggregated by year.", "requires_multiple_searches": false}
+
+Query: "How are lung cancer trials distributed across phases?"
+Plan: {"intent": "distribution", "viz_type": "bar_chart", "filters": {"condition": "lung cancer"}, "aggregation_field": "phase", "reasoning": "User asks about distribution across phases, bar_chart grouped by phase.", "requires_multiple_searches": false}
+
+Query: "Compare trial phases for Pembrolizumab vs Nivolumab"
+Plan: {"intent": "comparison", "viz_type": "grouped_bar_chart", "filters": {"drug_name": "Pembrolizumab", "secondary_drug": "Nivolumab"}, "aggregation_field": "phase", "reasoning": "User compares two drugs, grouped_bar_chart with phase on x-axis.", "requires_multiple_searches": true}
+
+Query: "Which countries have the most recruiting trials for type 2 diabetes?"
+Plan: {"intent": "geographic", "viz_type": "bar_chart", "filters": {"condition": "type 2 diabetes"}, "aggregation_field": "country", "reasoning": "User asks about geographic distribution, bar_chart by country.", "requires_multiple_searches": false}
+
+Query: "Show a network of sponsors and conditions for breast cancer trials"
+Plan: {"intent": "network", "viz_type": "network_graph", "filters": {"condition": "breast cancer"}, "aggregation_field": "sponsor_name", "reasoning": "User asks for relationship network, network_graph between sponsors and conditions.", "requires_multiple_searches": false}"""
 
 AGENT_SYSTEM_PROMPT = """You are a clinical trials data analyst agent with access to the ClinicalTrials.gov API.
 
