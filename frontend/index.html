@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClinicalTrials Agent</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface2: #1a2235;
+    --border: #1f2d45;
+    --accent: #3b82f6;
+    --accent2: #06b6d4;
+    --text: #e2e8f0;
+    --text-muted: #64748b;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    padding: 20px 32px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .logo-divider { width: 1px; height: 16px; background: var(--border); }
+
+  .logo-sub { font-size: 13px; color: var(--text-muted); }
+
+  main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    min-height: 0;
+  }
+
+  aside {
+    border-right: 1px solid var(--border);
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+  }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  textarea {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 12px 14px;
+    border-radius: 6px;
+    resize: vertical;
+    min-height: 80px;
+    line-height: 1.5;
+    transition: border-color 0.15s;
+    outline: none;
+  }
+
+  textarea:focus { border-color: var(--accent); }
+  textarea::placeholder { color: var(--text-muted); }
+
+  .run-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: background 0.15s, opacity 0.15s;
+  }
+
+  .run-btn:hover { background: #2563eb; }
+  .run-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* Example queries */
+  .examples { display: flex; flex-direction: column; gap: 8px; }
+
+  .example-chip {
+    padding: 12px 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    text-align: left;
+    width: 100%;
+  }
+
+  .example-chip:hover {
+    border-color: var(--accent);
+    background: #1e2d45;
+  }
+
+  .example-chip-type {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .example-chip-query {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  .example-chip:hover .example-chip-query { color: var(--text); }
+
+  /* Content */
+  .content { display: flex; flex-direction: column; overflow: hidden; }
+
+  .status-bar {
+    padding: 10px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    min-height: 40px;
+  }
+
+  .status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .status-dot.loading { background: var(--warning); animation: pulse 1s infinite; }
+  .status-dot.success { background: var(--success); }
+  .status-dot.error { background: var(--error); }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .status-tag {
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: var(--surface2);
+    color: var(--accent);
+    font-size: 10px;
+  }
+
+  .viz-area {
+    flex: 1;
+    padding: 28px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .empty-state {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+  }
+
+  .meta-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .meta-stat { display: flex; flex-direction: column; gap: 4px; }
+
+  .meta-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .meta-label { font-size: 11px; color: var(--text-muted); }
+
+  .chart-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+  }
+
+  .chart-title { font-size: 16px; font-weight: 500; margin-bottom: 4px; }
+
+  .chart-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .chart-wrap { position: relative; height: 340px; }
+
+  .assumptions {
+    padding: 12px 16px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--warning);
+    border-radius: 5px;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .citations-toggle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    width: auto;
+    text-align: left;
+    margin-top: 16px;
+  }
+
+  .citations-panel { margin-top: 12px; display: none; flex-direction: column; gap: 8px; }
+  .citations-panel.open { display: flex; }
+
+  .citation-item {
+    padding: 10px 12px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .citation-id {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--accent2);
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  .citation-excerpt { color: var(--text-muted); }
+
+  .citation-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 11px;
+    margin-top: 4px;
+    display: inline-block;
+  }
+
+  /* Loading screen */
+  .loading-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 32px;
+    padding: 40px;
+  }
+
+  .loading-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .loading-steps {
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .loading-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .loading-step.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .step-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 10px;
+  }
+
+  .step-icon.done { background: var(--success); color: #fff; }
+  .step-icon.active {
+    background: transparent;
+    border: 2px solid var(--accent);
+    animation: spin-border 1s linear infinite;
+  }
+
+  @keyframes spin-border {
+    0% { border-color: var(--accent) transparent transparent transparent; }
+    25% { border-color: var(--accent) var(--accent) transparent transparent; }
+    50% { border-color: var(--accent) var(--accent) var(--accent) transparent; }
+    75% { border-color: var(--accent); }
+    100% { border-color: var(--accent) transparent transparent transparent; }
+  }
+
+  .step-body { flex: 1; }
+
+  .step-event {
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 400;
+    margin-bottom: 2px;
+  }
+
+  .step-detail {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .error-card {
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--error);
+    border-radius: 8px;
+    color: var(--error);
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="logo">ClinicalTrials</span>
+  <div class="logo-divider"></div>
+  <span class="logo-sub">Query-to-Visualization Agent</span>
+</header>
+
+<main>
+  <aside>
+    <div>
+      <div class="section-label">Query</div>
+      <textarea id="query" placeholder="Ask a question about clinical trials..."></textarea>
+    </div>
+
+    <button class="run-btn" id="run-btn" onclick="runQuery()">Run Query</button>
+
+    <div>
+      <div class="section-label">Example queries</div>
+      <div class="examples">
+        <button class="example-chip" onclick="runExample('How has the number of trials for Pembrolizumab changed per year since 2015?', 'Pembrolizumab', null, 2015, null)">
+          <div class="example-chip-type">Time Series</div>
+          <div class="example-chip-query">How has the number of trials for Pembrolizumab changed per year since 2015?</div>
+        </button>
+        <button class="example-chip" onclick="runExample('How are lung cancer trials distributed across phases?', null, 'lung cancer', null, null)">
+          <div class="example-chip-type">Bar Chart</div>
+          <div class="example-chip-query">How are lung cancer trials distributed across phases?</div>
+        </button>
+        <button class="example-chip" onclick="runExample('What is the enrollment size distribution for Phase 3 cancer trials?', null, 'cancer', null, null)">
+          <div class="example-chip-type">Histogram</div>
+          <div class="example-chip-query">What is the enrollment size distribution for Phase 3 cancer trials?</div>
+        </button>
+        <button class="example-chip" onclick="runExample('What are the most common sponsor types for oncology trials?', null, 'cancer', null, null)">
+          <div class="example-chip-type">Sponsor Breakdown</div>
+          <div class="example-chip-query">What are the most common sponsor types for oncology trials?</div>
+        </button>
+        <button class="example-chip" onclick="runExample('Show a network of sponsors and conditions for breast cancer trials', null, 'breast cancer', null, null)">
+          <div class="example-chip-type">Network Graph</div>
+          <div class="example-chip-query">Show a network of sponsors and conditions for breast cancer trials</div>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="content">
+    <div class="status-bar" id="status-bar">
+      <div class="status-dot" id="status-dot"></div>
+      <span id="status-text">Select an example or type a query</span>
+    </div>
+
+    <div class="viz-area" id="viz-area">
+      <div class="empty-state" id="empty-state">
+        Select an example query to get started
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+const API_BASE = 'http://localhost:8000';
+let chartInstance = null;
+let allCitations = [];
+
+function setStatus(state, text, tags = []) {
+  const dot = document.getElementById('status-dot');
+  const statusText = document.getElementById('status-text');
+  dot.className = 'status-dot ' + state;
+  let html = text;
+  tags.forEach(t => html += ` <span class="status-tag">${t}</span>`);
+  statusText.innerHTML = html;
+}
+
+async function runExample(query, drug, condition, startYear, endYear) {
+  document.getElementById('query').value = query;
+  await runQueryWithParams(query, drug, condition, startYear, endYear);
+}
+
+async function runQuery() {
+  const query = document.getElementById('query').value.trim();
+  if (!query) return;
+  await runQueryWithParams(query, null, null, null, null);
+}
+
+async function runQueryWithParams(query, drug, condition, startYear, endYear) {
+  const btn = document.getElementById('run-btn');
+  btn.disabled = true;
+  setStatus('loading', 'Running agent...');
+
+  const body = { query };
+  if (drug) body.drug_name = drug;
+  if (condition) body.condition = condition;
+  if (startYear) body.start_year = startYear;
+  if (endYear) body.end_year = endYear;
+
+  // Show loading screen
+  stepCount = 0;
+  showLoadingScreen();
+
+  try {
+    const resp = await fetch(`${API_BASE}/query/stream`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+
+    if (!resp.ok) {
+      const err = await resp.json();
+      throw new Error(err.detail || `HTTP ${resp.status}`);
+    }
+
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop(); // keep incomplete line
+
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const json = line.slice(6).trim();
+        if (!json) continue;
+
+        try {
+          const msg = JSON.parse(json);
+          if (msg.type === 'progress') {
+            addLoadingStep(msg.event, msg.detail);
+          } else if (msg.type === 'result') {
+            addLoadingStep('Rendering visualization...', 'Done', true);
+            await new Promise(r => setTimeout(r, 400)); // brief pause to show final step
+            renderResponse(msg.data);
+            setStatus('success', 'Done', [
+              msg.data.visualization.type,
+              `${msg.data.meta.total_trials_retrieved.toLocaleString()} trials`,
+              `${msg.data.meta.tool_calls_made} tool calls`,
+            ]);
+          } else if (msg.type === 'error') {
+            throw new Error(msg.message);
+          }
+        } catch (e) {
+          if (e.message && !e.message.includes('JSON')) throw e;
+        }
+      }
+    }
+  } catch (e) {
+    setStatus('error', `Error: ${e.message}`);
+    showError(e.message);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function showLoadingScreen() {
+  if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+  const area = document.getElementById('viz-area');
+  area.innerHTML = `
+    <div class="loading-screen" id="loading-screen">
+      <div class="loading-title">Agent running</div>
+      <div class="loading-steps" id="loading-steps"></div>
+    </div>
+  `;
+}
+
+let stepCount = 0;
+function addLoadingStep(event, detail, isFinal = false) {
+  stepCount++;
+  const steps = document.getElementById('loading-steps');
+  if (!steps) return;
+
+  // Mark previous step as done
+  const prev = steps.querySelector('.step-icon.active');
+  if (prev) {
+    prev.classList.remove('active');
+    prev.classList.add('done');
+    prev.textContent = '✓';
+  }
+
+  const step = document.createElement('div');
+  step.className = 'loading-step';
+  step.innerHTML = `
+    <div class="step-icon ${isFinal ? 'done' : 'active'}">${isFinal ? '✓' : ''}</div>
+    <div class="step-body">
+      <div class="step-event">${event}</div>
+      <div class="step-detail">${detail}</div>
+    </div>
+  `;
+  steps.appendChild(step);
+
+  // Trigger animation
+  requestAnimationFrame(() => step.classList.add('visible'));
+  steps.scrollTop = steps.scrollHeight;
+}
+
+function renderResponse(data) {
+  const viz = data.visualization;
+  const meta = data.meta;
+
+  if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+
+  const area = document.getElementById('viz-area');
+  area.innerHTML = '';
+
+  allCitations = [];
+  (viz.data || []).forEach(d => {
+    if (d.citations) allCitations.push(...d.citations);
+  });
+
+  // Meta card
+  const metaCard = document.createElement('div');
+  metaCard.className = 'meta-card';
+  metaCard.innerHTML = `
+    <div class="meta-stat">
+      <span class="meta-value">${meta.total_trials_retrieved.toLocaleString()}</span>
+      <span class="meta-label">Trials retrieved</span>
+    </div>
+    <div class="meta-stat">
+      <span class="meta-value">${viz.data ? viz.data.length : '—'}</span>
+      <span class="meta-label">Data points</span>
+    </div>
+    <div class="meta-stat">
+      <span class="meta-value">${meta.tool_calls_made}</span>
+      <span class="meta-label">Tool calls</span>
+    </div>
+    <div class="meta-stat">
+      <span class="meta-value">${allCitations.length}</span>
+      <span class="meta-label">Citations</span>
+    </div>
+  `;
+  area.appendChild(metaCard);
+
+  if (meta.assumptions && meta.assumptions.length > 0) {
+    const ass = document.createElement('div');
+    ass.className = 'assumptions';
+    ass.innerHTML = '<strong style="color:var(--warning)">Assumptions: </strong>' + meta.assumptions.join(' · ');
+    area.appendChild(ass);
+  }
+
+  const card = document.createElement('div');
+  card.className = 'chart-card';
+  card.innerHTML = `
+    <div class="chart-title">${viz.title}</div>
+    <div class="chart-subtitle">${viz.type.replace(/_/g, ' ').toUpperCase()} · ${meta.query_interpretation}</div>
+  `;
+
+  if (viz.type === 'network_graph') {
+    renderNetwork(card, viz);
+  } else if (viz.type === 'pie_chart') {
+    renderPie(card, viz);
+  } else {
+    renderChart(card, viz);
+  }
+
+  if (allCitations.length > 0) {
+    const toggle = document.createElement('button');
+    toggle.className = 'citations-toggle';
+    toggle.textContent = `▶ Show ${allCitations.length} source citations`;
+
+    const panel = document.createElement('div');
+    panel.className = 'citations-panel';
+
+    toggle.onclick = () => {
+      panel.classList.toggle('open');
+      toggle.textContent = panel.classList.contains('open')
+        ? `▼ Hide citations`
+        : `▶ Show ${allCitations.length} source citations`;
+    };
+
+    allCitations.slice(0, 20).forEach(c => {
+      panel.innerHTML += `
+        <div class="citation-item">
+          <div class="citation-id">${c.nct_id}</div>
+          <div class="citation-excerpt">${c.excerpt}</div>
+          <a class="citation-link" href="${c.url}" target="_blank">View on ClinicalTrials.gov →</a>
+        </div>
+      `;
+    });
+
+    card.appendChild(toggle);
+    card.appendChild(panel);
+  }
+
+  area.appendChild(card);
+}
+
+function renderChart(card, viz) {
+  const wrap = document.createElement('div');
+  wrap.className = 'chart-wrap';
+  const canvas = document.createElement('canvas');
+  wrap.appendChild(canvas);
+  card.appendChild(wrap);
+
+  const enc = viz.encoding;
+  const xField = enc.x ? enc.x.field : null;
+  const yField = enc.y ? enc.y.field : 'trial_count';
+  const seriesField = enc.series ? enc.series.field : null;
+
+  const COLORS = ['#3b82f6','#06b6d4','#8b5cf6','#10b981','#f59e0b','#ef4444','#ec4899','#14b8a6','#f97316','#a78bfa'];
+
+  let chartConfig;
+
+  if (viz.type === 'grouped_bar_chart' && seriesField) {
+    const seriesMap = {};
+    const labels = [...new Set(viz.data.map(d => d[xField]))];
+    viz.data.forEach(d => {
+      const s = d[seriesField] || 'Default';
+      if (!seriesMap[s]) seriesMap[s] = {};
+      seriesMap[s][d[xField]] = d[yField];
+    });
+
+    const datasets = Object.entries(seriesMap).map(([name, vals], i) => ({
+      label: name,
+      data: labels.map(l => vals[l] || 0),
+      backgroundColor: COLORS[i % COLORS.length] + 'cc',
+      borderColor: COLORS[i % COLORS.length],
+      borderWidth: 1,
+      borderRadius: 3,
+    }));
+
+    chartConfig = {
+      type: 'bar',
+      data: { labels, datasets },
+      options: chartOptions(enc.x?.label, enc.y?.label),
+    };
+
+  } else if (viz.type === 'time_series') {
+    const sorted = [...viz.data].sort((a, b) => String(a[xField]).localeCompare(String(b[xField])));
+    chartConfig = {
+      type: 'line',
+      data: {
+        labels: sorted.map(d => d[xField]),
+        datasets: [{
+          label: enc.y?.label || yField,
+          data: sorted.map(d => d[yField]),
+          borderColor: '#3b82f6',
+          backgroundColor: '#3b82f620',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointBackgroundColor: '#3b82f6',
+        }],
+      },
+      options: chartOptions(enc.x?.label, enc.y?.label),
+    };
+
+  } else {
+    chartConfig = {
+      type: 'bar',
+      data: {
+        labels: viz.data.map(d => d[xField]),
+        datasets: [{
+          label: enc.y?.label || yField,
+          data: viz.data.map(d => d[yField]),
+          backgroundColor: COLORS.map(c => c + 'cc'),
+          borderColor: COLORS,
+          borderWidth: 1,
+          borderRadius: 3,
+        }],
+      },
+      options: chartOptions(enc.x?.label, enc.y?.label),
+    };
+  }
+
+  // Remove gaps for histogram
+  if (viz.type === 'histogram' && chartConfig.data.datasets) {
+    chartConfig.data.datasets.forEach(ds => {
+      ds.barPercentage = 1.0;
+      ds.categoryPercentage = 1.0;
+      ds.borderRadius = 0;
+      ds.borderWidth = 1;
+      ds.borderColor = '#0a0e1a';
+      ds.backgroundColor = '#3b82f6cc';
+    });
+  }
+
+  chartInstance = new Chart(canvas, chartConfig);
+}
+
+function chartOptions(xLabel, yLabel) {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { labels: { color: '#94a3b8', font: { family: 'IBM Plex Sans', size: 12 } } },
+      tooltip: {
+        backgroundColor: '#1a2235',
+        borderColor: '#1f2d45',
+        borderWidth: 1,
+        titleColor: '#e2e8f0',
+        bodyColor: '#94a3b8',
+      },
+    },
+    scales: {
+      x: {
+        ticks: { color: '#64748b', font: { family: 'IBM Plex Mono', size: 11 } },
+        grid: { color: '#1f2d45' },
+        title: xLabel ? { display: true, text: xLabel, color: '#64748b', font: { size: 11 } } : undefined,
+      },
+      y: {
+        ticks: { color: '#64748b', font: { family: 'IBM Plex Mono', size: 11 } },
+        grid: { color: '#1f2d45' },
+        title: yLabel ? { display: true, text: yLabel, color: '#64748b', font: { size: 11 } } : undefined,
+      },
+    },
+  };
+}
+
+function renderNetwork(card, viz) {
+  const enc = viz.encoding;
+  const nodes = enc.nodes || [];
+  const edges = enc.edges || [];
+
+  const container = document.createElement('div');
+  container.style.cssText = 'position:relative;width:100%;height:500px;background:var(--surface2);border-radius:6px;overflow:hidden';
+  card.appendChild(container);
+
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('width', '100%');
+  svg.setAttribute('height', '500');
+  svg.style.position = 'absolute';
+  container.appendChild(svg);
+
+  const W = container.clientWidth || 800;
+  const H = 500;
+  const COLOR = { sponsor: '#3b82f6', condition: '#10b981' };
+
+  const sponsors = nodes.filter(n => n.type === 'sponsor');
+  const conditions = nodes.filter(n => n.type === 'condition');
+
+  const pos = {};
+  sponsors.forEach((n, i) => {
+    pos[n.id] = { x: W * 0.25, y: (H / (sponsors.length + 1)) * (i + 1) };
+  });
+  conditions.forEach((n, i) => {
+    pos[n.id] = { x: W * 0.75, y: (H / (conditions.length + 1)) * (i + 1) };
+  });
+
+  const maxWeight = Math.max(...edges.map(e => e.weight || 1));
+  edges.forEach(e => {
+    if (!pos[e.source] || !pos[e.target]) return;
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    const w = (e.weight || 1) / maxWeight;
+    line.setAttribute('x1', pos[e.source].x);
+    line.setAttribute('y1', pos[e.source].y);
+    line.setAttribute('x2', pos[e.target].x);
+    line.setAttribute('y2', pos[e.target].y);
+    line.setAttribute('stroke', `rgba(100,116,139,${0.1 + w * 0.4})`);
+    line.setAttribute('stroke-width', 1 + w * 3);
+    svg.appendChild(line);
+  });
+
+  nodes.forEach(n => {
+    if (!pos[n.id]) return;
+    const { x, y } = pos[n.id];
+    const color = COLOR[n.type] || '#94a3b8';
+
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', x);
+    circle.setAttribute('cy', y);
+    circle.setAttribute('r', 6);
+    circle.setAttribute('fill', color);
+    circle.setAttribute('fill-opacity', '0.8');
+
+    const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+    title.textContent = n.label;
+    circle.appendChild(title);
+
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.setAttribute('x', n.type === 'sponsor' ? x - 14 : x + 14);
+    text.setAttribute('y', y + 4);
+    text.setAttribute('text-anchor', n.type === 'sponsor' ? 'end' : 'start');
+    text.setAttribute('fill', '#94a3b8');
+    text.setAttribute('font-size', '11');
+    text.setAttribute('font-family', 'IBM Plex Sans');
+    text.textContent = n.label.length > 22 ? n.label.slice(0, 22) + '…' : n.label;
+
+    svg.appendChild(circle);
+    svg.appendChild(text);
+  });
+
+  const legend = document.createElement('div');
+  legend.style.cssText = 'display:flex;gap:16px;font-size:11px;font-family:IBM Plex Mono,monospace;color:#64748b;margin-top:12px;padding-left:4px';
+  legend.innerHTML = `
+    <span><span style="color:#3b82f6">●</span> Sponsor</span>
+    <span><span style="color:#10b981">●</span> Condition</span>
+    <span style="color:#475569">Edge weight = co-occurring trials</span>
+  `;
+  card.appendChild(legend);
+}
+
+function renderPie(card, viz) {
+  const wrap = document.createElement('div');
+  wrap.className = 'chart-wrap';
+  const canvas = document.createElement('canvas');
+  wrap.appendChild(canvas);
+  card.appendChild(wrap);
+
+  const enc = viz.encoding;
+  const xField = enc.x ? enc.x.field : 'sponsor_class';
+  const yField = enc.y ? enc.y.field : 'trial_count';
+
+  const COLORS = ['#3b82f6','#06b6d4','#8b5cf6','#10b981','#f59e0b','#ef4444','#ec4899','#14b8a6'];
+
+  chartInstance = new Chart(canvas, {
+    type: 'pie',
+    data: {
+      labels: viz.data.map(d => d[xField]),
+      datasets: [{
+        data: viz.data.map(d => d[yField]),
+        backgroundColor: COLORS.map(c => c + 'cc'),
+        borderColor: COLORS,
+        borderWidth: 2,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'right',
+          labels: { color: '#94a3b8', font: { family: 'IBM Plex Sans', size: 12 }, padding: 16 },
+        },
+        tooltip: {
+          backgroundColor: '#1a2235',
+          borderColor: '#1f2d45',
+          borderWidth: 1,
+          titleColor: '#e2e8f0',
+          bodyColor: '#94a3b8',
+          callbacks: {
+            label: ctx => ` ${ctx.label}: ${ctx.parsed.toLocaleString()} trials (${((ctx.parsed / ctx.dataset.data.reduce((a,b) => a+b, 0)) * 100).toFixed(1)}%)`,
+          },
+        },
+      },
+    },
+  });
+}
+
+function showError(msg) {
+  const area = document.getElementById('viz-area');
+  area.innerHTML = `<div class="error-card"><strong>Error:</strong> ${msg}<br><br><span style="color:var(--text-muted);font-size:12px">Make sure the FastAPI server is running on port 8000.</span></div>`;
+}
+
+document.getElementById('query').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.metaKey) runQuery();
+});
+</script>
+</body>
+</html>

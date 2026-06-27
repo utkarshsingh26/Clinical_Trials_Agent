@@ -1,0 +1,2146 @@
+[
+  {
+    "example_id": 1,
+    "description": "Time trend \u2014 trials over time",
+    "query": "How has the number of trials for Pembrolizumab changed per year since 2015?",
+    "output": {
+      "visualization": {
+        "type": "time_series",
+        "title": "Trials Over Time: Pembrolizumab",
+        "encoding": {
+          "encoding_type": "cartesian",
+          "x": {
+            "field": "start_year",
+            "label": "Year",
+            "type": "temporal"
+          },
+          "y": {
+            "field": "trial_count",
+            "label": "Number of Trials",
+            "type": "quantitative"
+          },
+          "series": null,
+          "sort": "descending"
+        },
+        "data": [
+          {
+            "start_year": "2022",
+            "trial_count": 298,
+            "citations": [
+              {
+                "nct_id": "NCT05514444",
+                "excerpt": "The purpose of this study is to assess the safety, pharmacokinetics, and preliminary efficacy of MK-4464 as monotherapy and in combination with pembrolizumab in participants with advanced/metastatic solid tumors.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT05514444"
+              },
+              {
+                "nct_id": "NCT05333809",
+                "excerpt": "This is an open-label, multi-center, phase \u2161 study. This study will evaluate the efficacy and safety of pembrolizumab in combination with disitamab vedotin in subject with HER2-expressing metastatic Colorectal Cancer (mCRC).",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT05333809"
+              },
+              {
+                "nct_id": "NCT05098132",
+                "excerpt": "This is a phase 1/2, multicenter, open-label study. The phase 1 portion is a dose escalation and expansion study of STK-012 as monotherapy and in combination therapy in patients with selected advanced solid tumors. The phase 2 portion is a randomized study of STK-012 in combination with standard ...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT05098132"
+              }
+            ]
+          },
+          {
+            "start_year": "2021",
+            "trial_count": 265,
+            "citations": [
+              {
+                "nct_id": "NCT05060432",
+                "excerpt": "This is a multicenter, open-label, phase I/II basket study, evaluating the safety, tolerability, RP2D, pharmacokinetics, pharmacodynamics and antitumor activity of EOS-448 (also known as GSK4428859A or belrestotug) combined with standard of care and/or with investigational therapies in participan...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT05060432"
+              },
+              {
+                "nct_id": "NCT04166734",
+                "excerpt": "This is a multi-centre non-randomised open-label phase 1 trial of pembrolizumab given in combination with SBRT to part of a pleural-based lesion in patients with unresectable MPM. This study will recruit up to 18 patients whose MPM has progressed beyond first-line of palliative chemotherapy, with...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04166734"
+              },
+              {
+                "nct_id": "NCT04879849",
+                "excerpt": "In this study, adults with non-small-cell lung cancer (NSCLC), triple-negative breast cancer (TNBC) and squamous-cell carcinoma of the head and neck (SCCHN) will be treated with TAK-676 and pembrolizumab following radiotherapy. The main aims of this study are to check if people are improving afte...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04879849"
+              }
+            ]
+          },
+          {
+            "start_year": "2020",
+            "trial_count": 262,
+            "citations": [
+              {
+                "nct_id": "NCT04249739",
+                "excerpt": "This study is an open-label, single arm, phase II trial the efficacy and safety of pembrolizumab + CapeOx (HER2 negative ARM) or pembrolizumab + Trastuzumab + Capecitabine/Cisplatin (HER2 positive ARM) as first line therapy in advanced gastric or gastroesophageal junction (GEJ) adenocarcinoma.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04249739"
+              },
+              {
+                "nct_id": "NCT04468061",
+                "excerpt": "This research study involves testing the safety and efficacy of an investigational intervention for patients with triple-negative breast cancer (TNBC) that has spread, or metastasized, to other parts the body and is PD-L1-negative.\n\nThe names of the study interventions involved in this study are:...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04468061"
+              },
+              {
+                "nct_id": "NCT04521621",
+                "excerpt": "The purpose of this study is to evaluate the safety, tolerability, and efficacy in participants with advanced/metastatic or recurrent malignancies who receive gebasaxturev (V937) in combination with pembrolizumab (MK-3475). The primary objective for Part 1 is to evaluate the objective response ra...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04521621"
+              }
+            ]
+          },
+          {
+            "start_year": "2017",
+            "trial_count": 260,
+            "citations": [
+              {
+                "nct_id": "NCT02972034",
+                "excerpt": "This study will evaluate the safety, tolerability and preliminary efficacy of MK-8353 when administered in combination with pembrolizumab (MK-3475). There are two parts in this study: Part 1 will be dose escalation and confirmation, and Part 2 will be a cohort expansion. In Part 1, the recommende...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT02972034"
+              },
+              {
+                "nct_id": "NCT03393858",
+                "excerpt": "The purpose of this study is to investigate the clinical efficacy and toxicity of anti-PD-1 monoclonal antibody plus autologous dendritic cells-cytokine induced killer cell (DC-CIK) immunotherapy combined with hyperthermia in advanced malignant mesothelioma patients.Furthermore,to characterize re...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03393858"
+              },
+              {
+                "nct_id": "NCT03095352",
+                "excerpt": "This is a phase II multicenter study including breast cancer patients with chest wall disease that is hormone resistant (estrogen receptor (ER) positive/progesterone receptor (PR) positive/human epidermal growth factor receptor 2 (HER2) negative breast cancer with progressive disease on 2 prior l...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03095352"
+              }
+            ]
+          },
+          {
+            "start_year": "2025",
+            "trial_count": 260,
+            "citations": [
+              {
+                "nct_id": "NCT06529809",
+                "excerpt": "The standard treatment for locally advanced cervical cancer is well established as a combination of chemotherapy and radiation, typically over 25-28 daily fractions with the addition of a brachytherapy boost to the primary tumor. An important component to treatment efficacy is overall treatment t...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT06529809"
+              },
+              {
+                "nct_id": "NCT06522919",
+                "excerpt": "Single-arm, open-label, multicenter phase 2 clinical trial evaluating the clinical and the immunological activity of an innovative strategy with an induction combo immunotherapy (Pembrolizumab plus DC Vaccine) followed by a maintenance chemotherapy (FTD/TPI plus Bevacizumab) in patients with refr...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT06522919"
+              },
+              {
+                "nct_id": "NCT06725368",
+                "excerpt": "This study targets an adult population of patients with recurrent or metastatic (R/M) head and neck squamous cell carcinoma (HNSCC), who have failed after a first line of treatment with pembrolizumab associated or not with chemotherapy and having an indication for a second line of treatment. Pati...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT06725368"
+              }
+            ]
+          },
+          {
+            "start_year": "2023",
+            "trial_count": 257,
+            "citations": [
+              {
+                "nct_id": "NCT05843448",
+                "excerpt": "This phase I trial tests the safety and side effects of a PD-L1/IDO peptide vaccine (IO102-IO103) in combination with pembrolizumab in treating patients with non-muscle invasive bladder cancer. IO102-IO103 is a novel IDO and PD-L1 peptide based immune-modulatory therapeutic. It is designed to act...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT05843448"
+              },
+              {
+                "nct_id": "NCT05996523",
+                "excerpt": "Background:\n\nCancers in and around the mouth associated with human papilloma virus (HPV) are common. Two treatments (the drug pembrolizumab and the HPV vaccine PRGN-2009) have been shown to work well when used individually against these cancers. Researchers want to find out if they might work bet...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT05996523"
+              },
+              {
+                "nct_id": "NCT05859464",
+                "excerpt": "The purpose of this study is to characterize the safety, tolerability, pharmacokinetics (PK), pharmacodynamics (PD), and preliminary antitumor activity of ZL-1218 as a single agent and as combination therapy in subjects with advanced solid tumor malignancies.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT05859464"
+              }
+            ]
+          },
+          {
+            "start_year": "2024",
+            "trial_count": 256,
+            "citations": [
+              {
+                "nct_id": "NCT06422143",
+                "excerpt": "This is a phase 3 study of pembrolizumab in combination with carboplatin/taxane (paclitaxel or nab-paclitaxel) followed by pembrolizumab with or without maintenance sacituzumab tirumotecan (sac-TMT; MK-2870) in first-line treatment of metastatic squamous non-small cell lung cancer. It is hypothes...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT06422143"
+              },
+              {
+                "nct_id": "NCT06131398",
+                "excerpt": "The primary objectives of this study are to:\n\n* Evaluate the safety and tolerability of AMG 355 as monotherapy and in combination with pembrolizumab in participants with advanced solid tumors\n* Determine the recommended phase 2 dose and the maximum tolerated dose for AMG 355 as monotherapy and in...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT06131398"
+              },
+              {
+                "nct_id": "NCT06463665",
+                "excerpt": "This Phase 2, open-label, randomized study in non-small-cell lung cancer (NSCLC) is designed to evaluate the efficacy and safety of an intravenously delivered oncolytic vaccinia virus, Olvi-Vec, followed by platinum-doublet chemotherapy + Physician's Choice of Immune Checkpoint Inhibitor (ICI) vs...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT06463665"
+              }
+            ]
+          },
+          {
+            "start_year": "2018",
+            "trial_count": 255,
+            "citations": [
+              {
+                "nct_id": "NCT03725059",
+                "excerpt": "The purpose of this study is to assess the efficacy and safety of pembrolizumab (MK-3475) versus placebo in combination with neoadjuvant (pre-surgery) chemotherapy and adjuvant (post-surgery) endocrine therapy in the treatment of adults who have high-risk early-stage estrogen receptor-positive, h...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03725059"
+              },
+              {
+                "nct_id": "NCT03313206",
+                "excerpt": "The main objective will be to estimate the disease free survival (DFS) of patients with resectable head and neck mucosal melanomas treated by neo-adjuvant anti-PD1 (in combination or not with lenvatinib) followed by surgery, radiotherapy and maintenance immunotherapy in order to compare it to his...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03313206"
+              },
+              {
+                "nct_id": "NCT03595683",
+                "excerpt": "This study is being done to determine if orally administered EDP1503 will enhance the response to standard immunotherapy treatment (pembrolizumab) in participants with advanced melanoma.\n\nThe study will involve initial administration of EDP1503 for a run-in period (2 weeks) followed by administra...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03595683"
+              }
+            ]
+          },
+          {
+            "start_year": "2019",
+            "trial_count": 247,
+            "citations": [
+              {
+                "nct_id": "NCT03786081",
+                "excerpt": "This is an open label, multi-center trial of tisotumab vedotin monotherapy and in combination with bevacizumab, pembrolizumab, or carboplatin in subjects with recurrent or stage IVB cervical cancer.\n\nThe trial consists of two-parts a dose escalation part and an expansion part. The expansion part ...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03786081"
+              },
+              {
+                "nct_id": "NCT03696212",
+                "excerpt": "This study will be conducted in adult participants diagnosed with NSCLC who have been previously treated for a minimum of 12 weeks with any PD-1 or PD-L1 checkpoint inhibitor. This is a phase 1b/2, multi-center, open label study designed to assess safety and tolerability of grapiprant in combinat...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03696212"
+              },
+              {
+                "nct_id": "NCT03698019",
+                "excerpt": "This phase II trial studies how pembrolizumab works before and after surgery in treating patients with stage III-IV high-risk melanoma. Immunotherapy with monoclonal antibodies, such as pembrolizumab, may help the body's immune system attack the cancer, and may interfere with the ability of tumor...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03698019"
+              }
+            ]
+          },
+          {
+            "start_year": "2016",
+            "trial_count": 195,
+            "citations": [
+              {
+                "nct_id": "NCT02621398",
+                "excerpt": "This phase I trial studies the side effects, best dose, and best way to give pembrolizumab when given together with paclitaxel, carboplatin, and radiation therapy in treating patients with stage II-IIIB non-small cell lung cancer. Monoclonal antibodies, such as pembrolizumab, may interfere with t...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT02621398"
+              },
+              {
+                "nct_id": "NCT02595866",
+                "excerpt": "This phase I trial studies the side effects of pembrolizumab in treating patients with human immunodeficiency virus (HIV) and malignant neoplasms that have come back (relapsed), do not respond to treatment (refractory), or have distributed over a large area in the body (disseminated). Immunothera...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT02595866"
+              },
+              {
+                "nct_id": "NCT03850444",
+                "excerpt": "In the China extension study, Chinese participants with programmed cell death ligand 1 (PD-L1)-positive non-small cell lung cancer (NSCLC) will be randomized to receive single agent pembrolizumab for up to 35 treatments or standard of care (SOC) platinum-based chemotherapy (carboplatin + paclitax...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03850444"
+              }
+            ]
+          },
+          {
+            "start_year": "2026",
+            "trial_count": 148,
+            "citations": [
+              {
+                "nct_id": "NCT07275216",
+                "excerpt": "This phase II trial tests how well pembrolizumab in addition to chemotherapy (gemcitabine, brentuximab vedotin, and dacarbazine) works in treating frail patients with newly diagnosed Hodgkin lymphoma who aren't candidates for standard anthracycline-based treatment. Immunotherapy with monoclonal a...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT07275216"
+              },
+              {
+                "nct_id": "NCT07277777",
+                "excerpt": "This prospective randomized trial evaluates the efficacy and safety of combining 125I seed interstitial brachytherapy with immune checkpoint inhibitor therapy in patients with primary, recurrent, or metastatic malignant tumors. Immunotherapy has become an important systemic treatment option, yet ...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT07277777"
+              },
+              {
+                "nct_id": "NCT07290894",
+                "excerpt": "MITO VULVA-1 is a prospective, single arm, multi-cohorts, phase II trial that aims to assess the activity and the safety of Lenvatinib plus Pembrolizumab in patients with vulvar cancer. 80 patients will be overall enrolled in the study.Three cohorts are planned",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT07290894"
+              }
+            ]
+          },
+          {
+            "start_year": "2015",
+            "trial_count": 120,
+            "citations": [
+              {
+                "nct_id": "NCT02511184",
+                "excerpt": "The purpose of this study has 2 phases, a Dose Finding Phase will determine the maximum tolerated dose . The Dose Expansion Phase will explore the safety, tolerability, and anti-tumor activity of the combination.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT02511184"
+              },
+              {
+                "nct_id": "NCT02564263",
+                "excerpt": "In this study, participants with advanced or metastatic adenocarcinoma or squamous cell carcinoma of the esophagus or Siewert type I adenocarcinoma of the esophagogastric junction (EGJ) that had progressed after first-line standard therapy were randomized to receive either pembrolizumab (MK-3475)...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT02564263"
+              },
+              {
+                "nct_id": "NCT02559687",
+                "excerpt": "In this study participants with advanced/metastatic adenocarcinoma of the esophagus (EAC), squamous cell carcinoma of the esophagus (ESCC), or advanced/metastatic Siewert type I adenocarcinoma of the esophagogastric junction (EGJ), who had been previously treated with two standard therapies, will...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT02559687"
+              }
+            ]
+          },
+          {
+            "start_year": "2027",
+            "trial_count": 2,
+            "citations": [
+              {
+                "nct_id": "NCT04266730",
+                "excerpt": "This is a single center, open-label phase I clinical trial designed to determine the safety of personalized and adjusted neoantigen peptide vaccine (PANDA-VAC) administered concurrently with pembrolizumab in subjects with advanced squamous non-small cell lung cancer (NSCLC) or squamous cell carci...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04266730"
+              },
+              {
+                "nct_id": "NCT07037004",
+                "excerpt": "This phase II trial compares the effect of adding a Live Biotherapeutic Product called CBM588 to pembrolizumab versus pembrolizumab alone in preventing return of disease (recurrence) after surgery for patients with renal cell cancer. Pembrolizumab is an immune checkpoint inhibitor. Immunotherapy ...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT07037004"
+              }
+            ]
+          }
+        ],
+        "x_axis_label": null,
+        "y_axis_label": null,
+        "color_scheme": "categorical"
+      },
+      "meta": {
+        "query_interpretation": "The user wants to see how the number of Pembrolizumab trials has changed per year since 2015, which is best answered with a time series visualized by start year.",
+        "filters_applied": {
+          "drug_name": "Pembrolizumab",
+          "start_year": 2015
+        },
+        "total_trials_retrieved": 2825,
+        "assumptions": [],
+        "tool_calls_made": 2,
+        "source": "clinicaltrials.gov"
+      },
+      "plan": {
+        "intent": "trend",
+        "viz_type": "time_series",
+        "filters": {
+          "drug_name": "Pembrolizumab",
+          "condition": null,
+          "trial_phase": null,
+          "sponsor": null,
+          "country": null,
+          "start_year": 2015,
+          "end_year": null,
+          "secondary_drug": null,
+          "secondary_condition": null
+        },
+        "aggregation_field": "start_year",
+        "reasoning": "The user wants to see how the number of Pembrolizumab trials has changed per year since 2015, which is best answered with a time series visualized by start year.",
+        "requires_multiple_searches": false
+      },
+      "error": null
+    }
+  },
+  {
+    "example_id": 2,
+    "description": "Distribution \u2014 phase breakdown",
+    "query": "How are lung cancer trials distributed across phases?",
+    "output": {
+      "visualization": {
+        "type": "bar_chart",
+        "title": "lung cancer Trials by Phase",
+        "encoding": {
+          "encoding_type": "cartesian",
+          "x": {
+            "field": "phase",
+            "label": "Phase",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "trial_count",
+            "label": "Number of Trials",
+            "type": "quantitative"
+          },
+          "series": null,
+          "sort": "descending"
+        },
+        "data": [
+          {
+            "phase": "Phase 2",
+            "trial_count": 1426,
+            "citations": [
+              {
+                "nct_id": "NCT04136535",
+                "excerpt": "Evaluate the efficacy and safety of Anlotinib Hydrochloride in combination with Pemetrexed and Carboplatin versus Pemetrexed and Carboplatin for advanced or locally-advanced Osimertinib-resistant non-squamous non-small cell lung cancer.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04136535"
+              },
+              {
+                "nct_id": "NCT01580735",
+                "excerpt": "The primary objective of this study is to examine if the combination regimen of ARQ 197 with erlotinib is active in subjects with locally advanced or metastatic NSCLC with activating mutation EGFR who progressed on EGFR-TKI monotherapy.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT01580735"
+              },
+              {
+                "nct_id": "NCT00004176",
+                "excerpt": "RATIONALE: Drugs used in chemotherapy use different ways to stop tumor cells from dividing so they stop growing or die. Radiation therapy uses high-energy x-rays to damage tumor cells. Drugs such as amifostine may protect normal cells from the side effects of chemotherapy and radiation therapy.\n\n...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT00004176"
+              }
+            ]
+          },
+          {
+            "phase": "Phase 1",
+            "trial_count": 1119,
+            "citations": [
+              {
+                "nct_id": "NCT01187615",
+                "excerpt": "This is a multi-center, open-label, non-randomized Phase I study to define the safety profile, maximum tolerated dose (MTD) and potential pharmacokinetic interaction of regorafenib in combination with pemetrexed and cisplatin in patients with Stage IIIB or Stage IV nonsquamous Non-Small Cell Lung...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT01187615"
+              },
+              {
+                "nct_id": "NCT00062335",
+                "excerpt": "RATIONALE: Using computer systems that create a 3-dimensional picture of the tumor to plan treatment may enable doctors to provide more effective radiation therapy that will cause less damage to normal tissue.\n\nPURPOSE: This phase I trial is studying the side effects and best dose of high-dose 3-...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT00062335"
+              },
+              {
+                "nct_id": "NCT04161391",
+                "excerpt": "A phase 1/2, first-in-human, open-label study to determine the safety, tolerability, PK, and preliminary efficacy of the novel RET/SRC inhibitor TPX-0046 in adult subjects with advanced or metastatic solid tumors harboring RET mutations or alterations. The study consists of three portions: 1) Pha...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04161391"
+              }
+            ]
+          },
+          {
+            "phase": "Unknown",
+            "trial_count": 1080,
+            "citations": [
+              {
+                "nct_id": "NCT04276025",
+                "excerpt": "Retrospective study in patients with therapy-naive non small cell lung carcinoma correlating presurgical F18-FDG-PET/CT imaging texture analysis data with postsurgical molecular pathology data and clinical patient outcome. Main aim is to identify pretherapeutic prognostic factors.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04276025"
+              },
+              {
+                "nct_id": "NCT00906789",
+                "excerpt": "This is a clinical trial using retrospective data of two different software devices developed by Riverain Medical Group: Softview and OnGuard 5.0. The two studies will be run concurrently. Riverain Medical Group's computer systems are designed to assist radiologists in their identification of lun...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT00906789"
+              },
+              {
+                "nct_id": "NCT04266691",
+                "excerpt": "Analysis of driver gene variation in early stage non-small cell lung cancer",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04266691"
+              }
+            ]
+          },
+          {
+            "phase": "N/A",
+            "trial_count": 812,
+            "citations": [
+              {
+                "nct_id": "NCT04160559",
+                "excerpt": "Patients with non-small cell lung cancer who met the inclusion and exclusion criteria were screened and randomly divided into control group and experimental group. Control group: chemotherapy plus water ,test group: chemotherapy plus green tea.\n\nPrimary endpoint: Assessment of changes in quality ...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04160559"
+              },
+              {
+                "nct_id": "NCT00428220",
+                "excerpt": "This is a study using sunitinib for patients ending treatment on a previous sunitinib malate protocol to continue to receive sunitinib. The patient must have been enrolled in one of the following studies: A6181030, A6181064, A6181078, A6181087, A6181094, A6181107, A6181108, A6181110, A6181111, A6...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT00428220"
+              },
+              {
+                "nct_id": "NCT04916223",
+                "excerpt": "Therapeutic massage is the most common non-traditional treatment option offered to improve quality of life, provide comfort and decrease pain in hospice and palliative care settings outside the hospital. Three systematic reviews of data in general pain, surgical and cancer populations found massa...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04916223"
+              }
+            ]
+          },
+          {
+            "phase": "Phase 3",
+            "trial_count": 447,
+            "citations": [
+              {
+                "nct_id": "NCT06422143",
+                "excerpt": "This is a phase 3 study of pembrolizumab in combination with carboplatin/taxane (paclitaxel or nab-paclitaxel) followed by pembrolizumab with or without maintenance sacituzumab tirumotecan (sac-TMT; MK-2870) in first-line treatment of metastatic squamous non-small cell lung cancer. It is hypothes...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT06422143"
+              },
+              {
+                "nct_id": "NCT02714010",
+                "excerpt": "This is a multi-center phase III randomized controlled study, designing to access whether the efficacy of EGFR-TKI alone on patients with brain metastasis from non-small cell lung cancer (NSCLC) harboring EGFR mutant type is not inferior to EGFR-TKI concurrent with whole brain radiotherapy (WBRT)...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT02714010"
+              },
+              {
+                "nct_id": "NCT02453282",
+                "excerpt": "This is a randomized, open-label, multi-center, global, Phase III study to determine the efficacy and safety of MEDI4736 + tremelimumab combination therapy and MEDI4736 monotherapy versus platinum-based SoC chemotherapy in the first-line treatment of patients with epidermal growth factor receptor...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT02453282"
+              }
+            ]
+          },
+          {
+            "phase": "Phase 4",
+            "trial_count": 79,
+            "citations": [
+              {
+                "nct_id": "NCT02348450",
+                "excerpt": "This study is aimed to evaluate the progression-free survival(PFS) and also survival of IP and EP (head-to-head) as the first line therapy for extensive stage small-cell lung cancer and to explore the reasonable first-line therapy for Chinese population. An open-label, multi-center study will be ...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT02348450"
+              },
+              {
+                "nct_id": "NCT05387109",
+                "excerpt": "Neoadjuvant therapy with penpulimab combined with anlotinib;with surgery within 4-6 weeks after drug withdrawal;Adjuvant therapy within 4-12 weeks after surgery",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT05387109"
+              },
+              {
+                "nct_id": "NCT06427811",
+                "excerpt": "The Drugs Controller General of India (DCGI) has granted approval for Asciminib film-coated 40 mg tablets on 20 Oct 2023 with the condition to perform a Phase IV clinical study in Indian patients with Philadelphia chromosome-positive chronic myeloid leukemia in chronic phase (Ph+ CML-CP) per the ...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT06427811"
+              }
+            ]
+          },
+          {
+            "phase": "Early Phase 1",
+            "trial_count": 37,
+            "citations": [
+              {
+                "nct_id": "NCT03315065",
+                "excerpt": "The goal of this study is to determine the feasibility and efficiency of incorporating 19F MR functional lung imaging into the routine assessment of lung cancer patients prior to thoracic radiotherapy.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03315065"
+              },
+              {
+                "nct_id": "NCT06148636",
+                "excerpt": "This is a safety study to determine the recommended dose to test in clinical trials. The study involves two treatments with 212Pb (212-lead) VMT-\u03b1-NET. This is a safety study only; it will most likely not provide therapeutic benefit.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT06148636"
+              },
+              {
+                "nct_id": "NCT04186988",
+                "excerpt": "This trial studies how well \\[18F\\]-AraG works in detecting T-cell activation in patients with non-small cell lung cancer that has spread to other places in the body (advanced), who are undergoing PD-1/PD-L1-directed therapy. \\[18F\\]-AraG is a \"radiotracer\" which attaches to immune cells directed...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04186988"
+              }
+            ]
+          }
+        ],
+        "x_axis_label": null,
+        "y_axis_label": null,
+        "color_scheme": "categorical"
+      },
+      "meta": {
+        "query_interpretation": "The user asks about how lung cancer trials are distributed across phases, which is best shown as a bar chart with aggregation by phase.",
+        "filters_applied": {
+          "condition": "lung cancer"
+        },
+        "total_trials_retrieved": 5000,
+        "assumptions": [
+          "Some trials had missing values and are grouped under 'Unknown'."
+        ],
+        "tool_calls_made": 2,
+        "source": "clinicaltrials.gov"
+      },
+      "plan": {
+        "intent": "distribution",
+        "viz_type": "bar_chart",
+        "filters": {
+          "drug_name": null,
+          "condition": "lung cancer",
+          "trial_phase": null,
+          "sponsor": null,
+          "country": null,
+          "start_year": null,
+          "end_year": null,
+          "secondary_drug": null,
+          "secondary_condition": null
+        },
+        "aggregation_field": "phase",
+        "reasoning": "The user asks about how lung cancer trials are distributed across phases, which is best shown as a bar chart with aggregation by phase.",
+        "requires_multiple_searches": false
+      },
+      "error": null
+    }
+  },
+  {
+    "example_id": 3,
+    "description": "Comparison \u2014 two drugs by phase",
+    "query": "Compare trial phases for Pembrolizumab vs Nivolumab",
+    "output": {
+      "visualization": {
+        "type": "grouped_bar_chart",
+        "title": "Trial Comparison: Pembrolizumab vs Nivolumab by Phase",
+        "encoding": {
+          "encoding_type": "cartesian",
+          "x": {
+            "field": "phase",
+            "label": "Phase",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "trial_count",
+            "label": "Number of Trials",
+            "type": "quantitative"
+          },
+          "series": {
+            "field": "series",
+            "label": "Group",
+            "type": "nominal"
+          },
+          "sort": "descending"
+        },
+        "data": [
+          {
+            "phase": "Phase 2",
+            "trial_count": 833,
+            "citations": [
+              {
+                "nct_id": "NCT04123925",
+                "excerpt": "A monocentric window of opportunity study preceded by a safety run-in phase. The study population will include locally advanced colon patients (T3 or T4).",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04123925"
+              },
+              {
+                "nct_id": "NCT07230613",
+                "excerpt": "The success of anti-PD-1 and anti-CTLA-4 therapies has initiated a paradigm shift in oncology, with drugs now targeting the immune system rather than cancer cells to stimulate the antitumor immune response. Intratumoral (IT) delivery of immunostimulating agents reduces the systemic toxicity assoc...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT07230613"
+              },
+              {
+                "nct_id": "NCT05779423",
+                "excerpt": "The aim of this study is to find out whether the combination of two approved drugs, ipilimumab and nivolumab, in combination with cryoablation are safe and effective for participants who have an unresectable melanoma that is resistant, or is growing, after receiving immunotherapy with a PD-1 inhi...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT05779423"
+              }
+            ],
+            "series": "Nivolumab"
+          },
+          {
+            "phase": "Phase 1",
+            "trial_count": 707,
+            "citations": [
+              {
+                "nct_id": "NCT04050085",
+                "excerpt": "This phase I trial studies the side effects of SD-101 when given together with nivolumab and radiation therapy in treating patients with pancreatic cancer that does not respond to treatment with chemotherapy (chemotherapy refractory) and has spread to other places in the body (metastatic). Drugs ...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04050085"
+              },
+              {
+                "nct_id": "NCT02946671",
+                "excerpt": "To assess the safety of preoperative combination therapy with KW-0761 (anti-CCR4) and ONO-4538 (anti-PD-1).\n\nTo assess the behavior of immune cells in peripheral blood and tumor.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT02946671"
+              },
+              {
+                "nct_id": "NCT03639714",
+                "excerpt": "The purpose of this study is to evaluate the safety, dose, immunogenicity and early clinical activity of GRT-C901 and GRT-R902, a personalized neoantigen cancer vaccine, in combination with nivolumab and ipilimumab, in patients with metastatic non-small cell lung cancer, microsatellite stable col...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03639714"
+              }
+            ],
+            "series": "Nivolumab"
+          },
+          {
+            "phase": "Unknown",
+            "trial_count": 209,
+            "citations": [
+              {
+                "nct_id": "NCT03569436",
+                "excerpt": "Non-interventional study in Japan of participants with HNC recurring or that has spread and who are treated with nivolumab",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03569436"
+              },
+              {
+                "nct_id": "NCT04470440",
+                "excerpt": "This is an observational, retrospective and monocentric study, conducted at the university Hospital of Brest The primary objective is to assess the association between the occurrence of thyroid dysfunction in patients treated with Nivolumab\u00ae for a non-small cell lung cancer and prognosis and ther...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04470440"
+              },
+              {
+                "nct_id": "NCT03647878",
+                "excerpt": "The purpose of the protocol, is to describe the use of cabozantinib tablets as monotherapy or in combination with nivolumab including the number of dose reductions, dose interruptions and terminations due to (serious) adverse events in subjects with advanced or metastatic renal cell carcinoma (mR...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03647878"
+              }
+            ],
+            "series": "Nivolumab"
+          },
+          {
+            "phase": "Phase 3",
+            "trial_count": 156,
+            "citations": [
+              {
+                "nct_id": "NCT06188676",
+                "excerpt": "This compares the effects of nivolumab at a fixed dose of 40 mg with chemo-immunotherapy versus chemo-immunotherapy alone in treating patients with newly diagnosed primary mediastinal B-cell lymphoma (PMBCL). Immunotherapy with monoclonal antibodies, such as nivolumab, may help the body's immune ...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT06188676"
+              },
+              {
+                "nct_id": "NCT02632409",
+                "excerpt": "The purpose of this study is to determine the effectiveness and safety of Nivolumab compared to placebo in participants who have undergone radical surgery for invasive urothelial cancer.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT02632409"
+              },
+              {
+                "nct_id": "NCT07166406",
+                "excerpt": "This phase III trial compares the effect of immunotherapy (IO) with stereotactic body radiation therapy (SBRT) to IO alone in treating patients with liver cancer (hepatocellular cancer) that may have spread from where it first started to nearby tissue, lymph nodes, or distant parts of the body (a...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT07166406"
+              }
+            ],
+            "series": "Nivolumab"
+          },
+          {
+            "phase": "N/A",
+            "trial_count": 49,
+            "citations": [
+              {
+                "nct_id": "NCT04256213",
+                "excerpt": "This is a multicenter, single arm pilot study evaluating the biological impact of \"Nivolumab + Ipilimumab\" in patients with cervical squamous cell carcinoma requiring RT-CT as initial therapy",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04256213"
+              },
+              {
+                "nct_id": "NCT03225365",
+                "excerpt": "This is an open bi-centric prospective non-randomized study in patients with metastatic melanoma treated with a first line treatment of Nivolumab +/- Ipilimumab. The aim of the study is to characterize the immune cells modulations under anti-PD-1 +/- anti-CTLA4 and identify the differences betwee...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03225365"
+              },
+              {
+                "nct_id": "NCT06991907",
+                "excerpt": "This study aims to explore the effectiveness and safety of 125I seed implantation in the treatment of hepatocellular carcinoma (HCC) with extrahepatic metastases, and to compare the efficacy differences between PD-1 inhibitor monotherapy and the combination of PD-1 inhibitor and 125I seed implant...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT06991907"
+              }
+            ],
+            "series": "Nivolumab"
+          },
+          {
+            "phase": "Early Phase 1",
+            "trial_count": 33,
+            "citations": [
+              {
+                "nct_id": "NCT07328087",
+                "excerpt": "This is an early phase I, single-arm, open-label clinical study designed to evaluate the safety, tolerability, and feasibility of COLONYVAQ-CRC, a physics-aware, quantum-classical AI-guided personalized neoantigen peptide vaccine, administered in combination with standard adjuvant oxaliplatin-bas...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT07328087"
+              },
+              {
+                "nct_id": "NCT03519308",
+                "excerpt": "The main purpose of this study is to look at the potential effects of paricalcitol (a drug similar to vitamin D) and nivolumab on pancreatic tumors in patients who are treated with gemcitabine and abraxane. The study will also look at the safety of including paricalcitol and nivolumab as part of ...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03519308"
+              },
+              {
+                "nct_id": "NCT04570683",
+                "excerpt": "The study aim is to assess the immunological and clinical response in basal cell carcinoma (BCC) treated with ablative fractionated laser (AFL) as monotherapy and compare with BCC treated with combination-therapy of AFL and the anti-PD1-drug nivolumab and with nivolumab as monotherapy.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04570683"
+              }
+            ],
+            "series": "Nivolumab"
+          },
+          {
+            "phase": "Phase 4",
+            "trial_count": 18,
+            "citations": [
+              {
+                "nct_id": "NCT03313544",
+                "excerpt": "Prospective, monocentric clinical study. Patients selected for nivolumab therapy in AP-HM for melanoma and non-small cell lung cancer will be eligible. Do not include patients with conditions that do not allow MRI, prior cardiovascular disease with LVEF\\<50%, cardiomyopathy, history of cardiac ar...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03313544"
+              },
+              {
+                "nct_id": "NCT02869789",
+                "excerpt": "A study to evaluate the safety of Nivolumab given in combination with Ipilimumab in patients with advanced cancers. The initial group will enroll patients with newly diagnosed Stage 4 or non-small cell lung cancer that has come back.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT02869789"
+              },
+              {
+                "nct_id": "NCT06903312",
+                "excerpt": "This is Phase IV, randomized, multi arm, multicenter, low interventional clinical trial, aiming to evaluate if treatment of primary tumor in mRCC patients with initial benefit to anti-PD1- based therapy (SOC) can improve the overall survival.\n\nAll patients eligible according to inclusion and excl...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT06903312"
+              }
+            ],
+            "series": "Nivolumab"
+          }
+        ],
+        "x_axis_label": null,
+        "y_axis_label": null,
+        "color_scheme": "categorical"
+      },
+      "meta": {
+        "query_interpretation": "The intent is to compare trial phases between Pembrolizumab and Nivolumab, so a grouped_bar_chart by 'phase' for both drugs is appropriate.",
+        "filters_applied": {
+          "drug_name": "Pembrolizumab",
+          "secondary_drug": "Nivolumab"
+        },
+        "total_trials_retrieved": 2005,
+        "assumptions": [
+          "Some trials had missing values and are grouped under 'Unknown'."
+        ],
+        "tool_calls_made": 4,
+        "source": "clinicaltrials.gov"
+      },
+      "plan": {
+        "intent": "comparison",
+        "viz_type": "grouped_bar_chart",
+        "filters": {
+          "drug_name": "Pembrolizumab",
+          "condition": null,
+          "trial_phase": null,
+          "sponsor": null,
+          "country": null,
+          "start_year": null,
+          "end_year": null,
+          "secondary_drug": "Nivolumab",
+          "secondary_condition": null
+        },
+        "aggregation_field": "phase",
+        "reasoning": "The intent is to compare trial phases between Pembrolizumab and Nivolumab, so a grouped_bar_chart by 'phase' for both drugs is appropriate.",
+        "requires_multiple_searches": true
+      },
+      "error": null
+    }
+  },
+  {
+    "example_id": 4,
+    "description": "Geographic \u2014 country distribution",
+    "query": "Which countries have the most recruiting trials for type 2 diabetes?",
+    "output": {
+      "visualization": {
+        "type": "bar_chart",
+        "title": "Geographic Distribution of type 2 diabetes Trials",
+        "encoding": {
+          "encoding_type": "cartesian",
+          "x": {
+            "field": "country",
+            "label": "Country",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "trial_count",
+            "label": "Number of Trials",
+            "type": "quantitative"
+          },
+          "series": null,
+          "sort": "descending"
+        },
+        "data": [
+          {
+            "country": "United States",
+            "trial_count": 1570,
+            "citations": [
+              {
+                "nct_id": "NCT00065676",
+                "excerpt": "Quercetin is a compound naturally found in various foods. It may have some role in the treatment of obesity and diabetes.\n\nThe purpose of this study is to investigate research volunteers with obesity or obesity with type 2 diabetes to determine whether quercetin affects the way glucose is absorbe...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT00065676"
+              },
+              {
+                "nct_id": "NCT07254689",
+                "excerpt": "The project, called Food for Health (F4H), will study a new Produce Prescription Program (PPP) designed for rural Native American older adults. The study is based in the Confederated Salish and Kootenai Tribes (CSKT) of the Flathead Indian Reservation in Montana. In this community, many older adu...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT07254689"
+              },
+              {
+                "nct_id": "NCT00443755",
+                "excerpt": "The objective of this study is to determine whether targeted pharmacological improvement of insulin sensitivity will normalize the associated elevations of thrombotic and inflammatory cardiovascular disease (CVD) biomarkers in individuals with insulin resistance.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT00443755"
+              }
+            ]
+          },
+          {
+            "country": "Unknown",
+            "trial_count": 507,
+            "citations": [
+              {
+                "nct_id": "NCT00308347",
+                "excerpt": "Evaluate the effect of Losartan in reducing kidney disease in patients with Non-insulin Dependent Diabetes and Nephropathy (kidney damage that usually accompanies late stage Diabetes Mellitus).",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT00308347"
+              },
+              {
+                "nct_id": "NCT06471699",
+                "excerpt": "The aim of the current study is to evaluate effectiveness, sustainability and satisfaction of CGM in adult persons with newly diagnosed type 2 diabetes. The study is a randomized clinical trial randomizing patients to CGM or SMBG over 26 weeks with a follow-up period up to 70 weeks. An extension ...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT06471699"
+              },
+              {
+                "nct_id": "NCT00704132",
+                "excerpt": "A clinical study to determine the safety, efficacy and the way sitagliptin works in patients with Type 2 Diabetes Mellitus who have inadequate glycemic (blood sugar) control.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT00704132"
+              }
+            ]
+          },
+          {
+            "country": "China",
+            "trial_count": 409,
+            "citations": [
+              {
+                "nct_id": "NCT03973515",
+                "excerpt": "This crossover study investigates the safety, tolerability, pharmacokinetics (PK) ,pharmacodynamics (PD) effect of three dose levels of PB-201,and characterizes the PK profile of a prominent des-methyl metabolite of PB-201(WI-0800), following dosing of three dose levels of PB-201 in drug-naive Ch...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03973515"
+              },
+              {
+                "nct_id": "NCT06061510",
+                "excerpt": "The objective of this research was to investigate the impact of Omega-3 PUFAs on the gut microbiota and serum lipid metabolites in participants diagnosed with type 2 diabetes, employing high-throughput sequencing technology and untargeted lipidomics.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT06061510"
+              },
+              {
+                "nct_id": "NCT04016974",
+                "excerpt": "This study looks at the way a new medicine tablet called semaglutide moves in and throughout the body over time. It will also look at if the medicine is safe and the body can accept it. The new medicine is planned to treat diabetes. The aim of the study is to see how semaglutide tablets work in h...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04016974"
+              }
+            ]
+          },
+          {
+            "country": "Germany",
+            "trial_count": 361,
+            "citations": [
+              {
+                "nct_id": "NCT05409924",
+                "excerpt": "This is a single-site, randomized, double-blinded, placebo-controlled, First-in-Human trial, conducted in 3 parts.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT05409924"
+              },
+              {
+                "nct_id": "NCT01061216",
+                "excerpt": "The primary objective of this study will be to assess the PK/PD responsiveness of basal ID administered insulin compared to SC, and to determine the safety and local tolerability of extended (two six-hour periods) microneedle insulin delivery (MID) infusion. The primary endpoint will be the PK re...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT01061216"
+              },
+              {
+                "nct_id": "NCT00440284",
+                "excerpt": "Objective. Flexible, intensive insulin therapy (FIT) with pre-prandial regular insulin and conventional insulin therapy (CIT) with twice daily premixed insulin are treatment options in patients with type 2 diabetes who become insulin dependent. While intensive insulin therapy can increase meal an...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT00440284"
+              }
+            ]
+          },
+          {
+            "country": "Canada",
+            "trial_count": 340,
+            "citations": [
+              {
+                "nct_id": "NCT03167684",
+                "excerpt": "This study will evaluate the impact on blood glucose of the use of an oral appliance to treat obstructive sleep apnea (OSA) in individuals with Type 2 diabetes. An oral appliance is similar to a sports mouth guard or an orthodontic retainer and is an alternative treatment to continuous positive a...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03167684"
+              },
+              {
+                "nct_id": "NCT01514149",
+                "excerpt": "DM200-103 is a dose-ranging study to evaluate the efficacy and safety of 17 weeks of weekly injections of CJC-1134-PC in patients with Type 2 Diabetes Mellitus on metformin monotherapy.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT01514149"
+              },
+              {
+                "nct_id": "NCT07564414",
+                "excerpt": "This clinical study is testing how the study medicine CagriSema helps people living with obesity, with or without type 2 diabetes (T2D), lose weight. The purpose of the study is to find out how safe and effective CagriSema is for body weight loss in these participants. Participants will receive e...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT07564414"
+              }
+            ]
+          },
+          {
+            "country": "United Kingdom",
+            "trial_count": 286,
+            "citations": [
+              {
+                "nct_id": "NCT02373150",
+                "excerpt": "This study will assess the pharmacokinetics of single and repeated doses of imeglimin in healthy Japanese subjects, and the safety and tolerability of single and repeated doses of imeglimin in healthy Japanese subjects.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT02373150"
+              },
+              {
+                "nct_id": "NCT02817360",
+                "excerpt": "Purpose and rationale The purpose of this study is to evaluate the effect of high dose Renin-Angiotensin System (RAS)-antagonists and beta-blocker treatment for the primary prevention of cardiac events in a population of patients with Type 2 diabetes mellitus (T2DM) with no evidence of a preexist...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT02817360"
+              },
+              {
+                "nct_id": "NCT06803771",
+                "excerpt": "The goal of this interventional study is to evaluate if the novel diagnostic blood test, called Avantect can early detect pancreatic cancer in patients diagnosed with type 2 diabetes within the last 6 months.\n\nParticipants will:\n\n* attend 3 study visits over 12 months time\n* provide a blood sampl...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT06803771"
+              }
+            ]
+          },
+          {
+            "country": "South Korea",
+            "trial_count": 264,
+            "citations": [
+              {
+                "nct_id": "NCT00412178",
+                "excerpt": "Previously we demonstrated the beneficial effects of an Internet-based glucose-monitoring system (IBGMS) in people with type 2 diabetes mellitus. The \"Diabetes Phone\", a cellular phone with a glucometer integrated in the battery pack, was launched in Korea in 2003. Here we test the short-term eff...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT00412178"
+              },
+              {
+                "nct_id": "NCT04266171",
+                "excerpt": "The aim of this study is to evaluate the effect of precision nutrition education using continuous glucose monitoring system (CGMS) in longterm glycemic control in patients with type 2 diabetes mellitus. Glucose levels in subjects who received diet education using CGMS will be compared to those in...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT04266171"
+              },
+              {
+                "nct_id": "NCT05401708",
+                "excerpt": "Diabetes mellitus is recognized as a metabolic disease that causes global economic and health burdens with an estimated number of patients 135 million in 1995 to 300 million in 2025. Moreover, the Asia-Pacific region is considered to be on the verge of an emerging diabetes epidemic. Diabetes is a...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT05401708"
+              }
+            ]
+          },
+          {
+            "country": "Denmark",
+            "trial_count": 233,
+            "citations": [
+              {
+                "nct_id": "NCT00515632",
+                "excerpt": "Type 2 diabetes mellitus is a metabolic disorder that is primarily characterized by insulin resistance, relative insulin deficiency, and hyperglycemia. People with type 2 diabetes are at high risk of many serious diabetic complications, including cardiovascular disease, blindness, nerve damage an...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT00515632"
+              },
+              {
+                "nct_id": "NCT03003793",
+                "excerpt": "The incidence of atopic dermatitis and type 2 diabetes, respectively, has increased over many years. Novel research shows an association between the two conditions. While this relationship at least in theory can be explained by lifestyle factors, there is reason to believe that other pathophysiol...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT03003793"
+              },
+              {
+                "nct_id": "NCT06624267",
+                "excerpt": "In the aging population, ischemic heart disease, stroke and dementia are increasingly prevalent. Diagnosis and treatment of the former two i.e., large-vessel coronary heart disease and endovascular thrombectomy of the brain in relation to stroke have improved significantly. Yet, the majority of e...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT06624267"
+              }
+            ]
+          },
+          {
+            "country": "Spain",
+            "trial_count": 221,
+            "citations": [
+              {
+                "nct_id": "NCT02817360",
+                "excerpt": "Purpose and rationale The purpose of this study is to evaluate the effect of high dose Renin-Angiotensin System (RAS)-antagonists and beta-blocker treatment for the primary prevention of cardiac events in a population of patients with Type 2 diabetes mellitus (T2DM) with no evidence of a preexist...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT02817360"
+              },
+              {
+                "nct_id": "NCT07564414",
+                "excerpt": "This clinical study is testing how the study medicine CagriSema helps people living with obesity, with or without type 2 diabetes (T2D), lose weight. The purpose of the study is to find out how safe and effective CagriSema is for body weight loss in these participants. Participants will receive e...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT07564414"
+              },
+              {
+                "nct_id": "NCT01006603",
+                "excerpt": "This study will evaluate the efficacy and tolerability of saxagliptin compared to glimepiride in elderly patients with type 2 diabetes mellitus who have inadequate glycaemic control on metformin monotherapy.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT01006603"
+              }
+            ]
+          },
+          {
+            "country": "Italy",
+            "trial_count": 212,
+            "citations": [
+              {
+                "nct_id": "NCT00917449",
+                "excerpt": "Aim\n\nThe principal objective of this project is:\n\n\u2022 To evaluate the efficacy of long term (18 months) L-Arginine therapy in preventing or delaying clinical onset of type 2 diabetes mellitus in subjects with impaired glucose tolerance (IGT) and Metabolic Syndrome.\n\nSecondary end points are:\n\n1. To...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT00917449"
+              },
+              {
+                "nct_id": "NCT07564414",
+                "excerpt": "This clinical study is testing how the study medicine CagriSema helps people living with obesity, with or without type 2 diabetes (T2D), lose weight. The purpose of the study is to find out how safe and effective CagriSema is for body weight loss in these participants. Participants will receive e...",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT07564414"
+              },
+              {
+                "nct_id": "NCT01006603",
+                "excerpt": "This study will evaluate the efficacy and tolerability of saxagliptin compared to glimepiride in elderly patients with type 2 diabetes mellitus who have inadequate glycaemic control on metformin monotherapy.",
+                "field_name": "protocolSection.descriptionModule.briefSummary",
+                "url": "https://clinicaltrials.gov/study/NCT01006603"
+              }
+            ]
+          }
+        ],
+        "x_axis_label": null,
+        "y_axis_label": null,
+        "color_scheme": "categorical"
+      },
+      "meta": {
+        "query_interpretation": "The user wants to see which countries have the largest number of ongoing (recruiting) trials for type 2 diabetes, so a bar chart by country is appropriate.",
+        "filters_applied": {
+          "condition": "type 2 diabetes"
+        },
+        "total_trials_retrieved": 5000,
+        "assumptions": [
+          "Some trials had missing values and are grouped under 'Unknown'.",
+          "Trials with multiple locations are counted once per country."
+        ],
+        "tool_calls_made": 2,
+        "source": "clinicaltrials.gov"
+      },
+      "plan": {
+        "intent": "geographic",
+        "viz_type": "bar_chart",
+        "filters": {
+          "drug_name": null,
+          "condition": "type 2 diabetes",
+          "trial_phase": null,
+          "sponsor": null,
+          "country": null,
+          "start_year": null,
+          "end_year": null,
+          "secondary_drug": null,
+          "secondary_condition": null
+        },
+        "aggregation_field": "country",
+        "reasoning": "The user wants to see which countries have the largest number of ongoing (recruiting) trials for type 2 diabetes, so a bar chart by country is appropriate.",
+        "requires_multiple_searches": false
+      },
+      "error": null
+    }
+  },
+  {
+    "example_id": 5,
+    "description": "Network \u2014 sponsor-condition relationships",
+    "query": "Show a network of sponsors and conditions for breast cancer trials",
+    "output": {
+      "visualization": {
+        "type": "network_graph",
+        "title": "Sponsor-Condition Network: breast cancer",
+        "encoding": {
+          "encoding_type": "network",
+          "nodes": [
+            {
+              "id": "sponsor_National Cancer Institute (NCI)",
+              "label": "National Cancer Institute (NCI)",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_M.D. Anderson Cancer Center",
+              "label": "M.D. Anderson Cancer Center",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_Fudan University",
+              "label": "Fudan University",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_Memorial Sloan Kettering Cancer Center",
+              "label": "Memorial Sloan Kettering Cancer Center",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_Mayo Clinic",
+              "label": "Mayo Clinic",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_Dana-Farber Cancer Institute",
+              "label": "Dana-Farber Cancer Institute",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_Novartis Pharmaceuticals",
+              "label": "Novartis Pharmaceuticals",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_Hoffmann-La Roche",
+              "label": "Hoffmann-La Roche",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_AstraZeneca",
+              "label": "AstraZeneca",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_Pfizer",
+              "label": "Pfizer",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_Alliance for Clinical Trials in Oncology",
+              "label": "Alliance for Clinical Trials in Oncology",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_Sun Yat-Sen Memorial Hospital of Sun Yat-Sen University",
+              "label": "Sun Yat-Sen Memorial Hospital of Sun Yat-Sen University",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_Northwestern University",
+              "label": "Northwestern University",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_City of Hope Medical Center",
+              "label": "City of Hope Medical Center",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_Washington University School of Medicine",
+              "label": "Washington University School of Medicine",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_UNC Lineberger Comprehensive Cancer Center",
+              "label": "UNC Lineberger Comprehensive Cancer Center",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_University of Washington",
+              "label": "University of Washington",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_Ohio State University Comprehensive Cancer Center",
+              "label": "Ohio State University Comprehensive Cancer Center",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_Case Comprehensive Cancer Center",
+              "label": "Case Comprehensive Cancer Center",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "sponsor_Duke University",
+              "label": "Duke University",
+              "type": "sponsor",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "condition_Breast Cancer",
+              "label": "Breast Cancer",
+              "type": "condition",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "condition_Breast Neoplasms",
+              "label": "Breast Neoplasms",
+              "type": "condition",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "condition_Metastatic Breast Cancer",
+              "label": "Metastatic Breast Cancer",
+              "type": "condition",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "condition_Breast Cancer Female",
+              "label": "Breast Cancer Female",
+              "type": "condition",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "condition_Triple Negative Breast Cancer",
+              "label": "Triple Negative Breast Cancer",
+              "type": "condition",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "condition_Cancer",
+              "label": "Cancer",
+              "type": "condition",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "condition_HER2-positive Breast Cancer",
+              "label": "HER2-positive Breast Cancer",
+              "type": "condition",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "condition_Breast Carcinoma",
+              "label": "Breast Carcinoma",
+              "type": "condition",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "condition_Advanced Breast Cancer",
+              "label": "Advanced Breast Cancer",
+              "type": "condition",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "condition_Colorectal Cancer",
+              "label": "Colorectal Cancer",
+              "type": "condition",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "condition_Breast Neoplasm",
+              "label": "Breast Neoplasm",
+              "type": "condition",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "condition_Lung Cancer",
+              "label": "Lung Cancer",
+              "type": "condition",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "condition_Lymphedema",
+              "label": "Lymphedema",
+              "type": "condition",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "condition_Anatomic Stage I Breast Cancer AJCC v8",
+              "label": "Anatomic Stage I Breast Cancer AJCC v8",
+              "type": "condition",
+              "weight": null,
+              "properties": {}
+            },
+            {
+              "id": "condition_Ovarian Cancer",
+              "label": "Ovarian Cancer",
+              "type": "condition",
+              "weight": null,
+              "properties": {}
+            }
+          ],
+          "edges": [
+            {
+              "source": "sponsor_Northwestern University",
+              "target": "condition_Breast Cancer",
+              "weight": 13.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_M.D. Anderson Cancer Center",
+              "target": "condition_Breast Cancer",
+              "weight": 47.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_M.D. Anderson Cancer Center",
+              "target": "condition_Breast Neoplasms",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Alliance for Clinical Trials in Oncology",
+              "target": "condition_Breast Cancer",
+              "weight": 27.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Pfizer",
+              "target": "condition_Metastatic Breast Cancer",
+              "weight": 4.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Pfizer",
+              "target": "condition_Advanced Breast Cancer",
+              "weight": 3.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Duke University",
+              "target": "condition_Breast Cancer",
+              "weight": 16.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_UNC Lineberger Comprehensive Cancer Center",
+              "target": "condition_Breast Cancer",
+              "weight": 19.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Novartis Pharmaceuticals",
+              "target": "condition_Breast Cancer",
+              "weight": 15.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Case Comprehensive Cancer Center",
+              "target": "condition_Cancer",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Hoffmann-La Roche",
+              "target": "condition_Breast Neoplasms",
+              "weight": 3.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_University of Washington",
+              "target": "condition_HER2-positive Breast Cancer",
+              "weight": 6.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Novartis Pharmaceuticals",
+              "target": "condition_Advanced Breast Cancer",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Dana-Farber Cancer Institute",
+              "target": "condition_Breast Cancer",
+              "weight": 38.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Memorial Sloan Kettering Cancer Center",
+              "target": "condition_Breast Cancer",
+              "weight": 57.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Alliance for Clinical Trials in Oncology",
+              "target": "condition_Anatomic Stage I Breast Cancer AJCC v8",
+              "weight": 3.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_City of Hope Medical Center",
+              "target": "condition_Breast Carcinoma",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_National Cancer Institute (NCI)",
+              "target": "condition_Breast Cancer",
+              "weight": 25.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Sun Yat-Sen Memorial Hospital of Sun Yat-Sen University",
+              "target": "condition_Breast Neoplasms",
+              "weight": 7.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_AstraZeneca",
+              "target": "condition_Advanced Breast Cancer",
+              "weight": 5.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Sun Yat-Sen Memorial Hospital of Sun Yat-Sen University",
+              "target": "condition_Breast Cancer",
+              "weight": 17.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Dana-Farber Cancer Institute",
+              "target": "condition_Triple Negative Breast Cancer",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_AstraZeneca",
+              "target": "condition_Breast Cancer",
+              "weight": 28.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Mayo Clinic",
+              "target": "condition_Breast Cancer",
+              "weight": 20.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Dana-Farber Cancer Institute",
+              "target": "condition_Metastatic Breast Cancer",
+              "weight": 3.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_City of Hope Medical Center",
+              "target": "condition_Breast Cancer",
+              "weight": 16.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Pfizer",
+              "target": "condition_Breast Neoplasms",
+              "weight": 21.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Hoffmann-La Roche",
+              "target": "condition_Breast Cancer",
+              "weight": 43.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Fudan University",
+              "target": "condition_Breast Cancer",
+              "weight": 35.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Novartis Pharmaceuticals",
+              "target": "condition_Breast Neoplasms",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_National Cancer Institute (NCI)",
+              "target": "condition_Breast Neoplasm",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_M.D. Anderson Cancer Center",
+              "target": "condition_Ovarian Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Case Comprehensive Cancer Center",
+              "target": "condition_Breast Cancer",
+              "weight": 20.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Hoffmann-La Roche",
+              "target": "condition_Metastatic Breast Cancer",
+              "weight": 4.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Dana-Farber Cancer Institute",
+              "target": "condition_Ovarian Cancer",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Mayo Clinic",
+              "target": "condition_Breast Carcinoma",
+              "weight": 10.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_M.D. Anderson Cancer Center",
+              "target": "condition_Anatomic Stage I Breast Cancer AJCC v8",
+              "weight": 4.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Ohio State University Comprehensive Cancer Center",
+              "target": "condition_Anatomic Stage I Breast Cancer AJCC v8",
+              "weight": 3.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Novartis Pharmaceuticals",
+              "target": "condition_Triple Negative Breast Cancer",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Duke University",
+              "target": "condition_Breast Neoplasms",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_University of Washington",
+              "target": "condition_Breast Cancer",
+              "weight": 8.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_University of Washington",
+              "target": "condition_Lung Cancer",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Memorial Sloan Kettering Cancer Center",
+              "target": "condition_Colorectal Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_National Cancer Institute (NCI)",
+              "target": "condition_Breast Neoplasms",
+              "weight": 7.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Duke University",
+              "target": "condition_Colorectal Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Washington University School of Medicine",
+              "target": "condition_Breast Cancer",
+              "weight": 13.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Novartis Pharmaceuticals",
+              "target": "condition_Metastatic Breast Cancer",
+              "weight": 7.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Fudan University",
+              "target": "condition_Metastatic Breast Cancer",
+              "weight": 8.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Mayo Clinic",
+              "target": "condition_Anatomic Stage I Breast Cancer AJCC v8",
+              "weight": 6.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_National Cancer Institute (NCI)",
+              "target": "condition_Cancer",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Northwestern University",
+              "target": "condition_Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Pfizer",
+              "target": "condition_Breast Cancer",
+              "weight": 8.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Ohio State University Comprehensive Cancer Center",
+              "target": "condition_Breast Carcinoma",
+              "weight": 4.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_University of Washington",
+              "target": "condition_Anatomic Stage I Breast Cancer AJCC v8",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Washington University School of Medicine",
+              "target": "condition_Breast Neoplasms",
+              "weight": 8.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Ohio State University Comprehensive Cancer Center",
+              "target": "condition_Breast Cancer",
+              "weight": 8.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Ohio State University Comprehensive Cancer Center",
+              "target": "condition_HER2-positive Breast Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_M.D. Anderson Cancer Center",
+              "target": "condition_Colorectal Cancer",
+              "weight": 5.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_University of Washington",
+              "target": "condition_Breast Neoplasm",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Alliance for Clinical Trials in Oncology",
+              "target": "condition_Colorectal Cancer",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Fudan University",
+              "target": "condition_HER2-positive Breast Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Northwestern University",
+              "target": "condition_Metastatic Breast Cancer",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_University of Washington",
+              "target": "condition_Ovarian Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_M.D. Anderson Cancer Center",
+              "target": "condition_Metastatic Breast Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Memorial Sloan Kettering Cancer Center",
+              "target": "condition_Lymphedema",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_AstraZeneca",
+              "target": "condition_Metastatic Breast Cancer",
+              "weight": 6.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_M.D. Anderson Cancer Center",
+              "target": "condition_Breast Carcinoma",
+              "weight": 8.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Dana-Farber Cancer Institute",
+              "target": "condition_Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Fudan University",
+              "target": "condition_Triple Negative Breast Cancer",
+              "weight": 3.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_UNC Lineberger Comprehensive Cancer Center",
+              "target": "condition_Lung Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_City of Hope Medical Center",
+              "target": "condition_Anatomic Stage I Breast Cancer AJCC v8",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Duke University",
+              "target": "condition_Advanced Breast Cancer",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_M.D. Anderson Cancer Center",
+              "target": "condition_Breast Neoplasm",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_National Cancer Institute (NCI)",
+              "target": "condition_HER2-positive Breast Cancer",
+              "weight": 3.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_UNC Lineberger Comprehensive Cancer Center",
+              "target": "condition_Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_UNC Lineberger Comprehensive Cancer Center",
+              "target": "condition_Metastatic Breast Cancer",
+              "weight": 7.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Pfizer",
+              "target": "condition_Ovarian Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Memorial Sloan Kettering Cancer Center",
+              "target": "condition_Metastatic Breast Cancer",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Ohio State University Comprehensive Cancer Center",
+              "target": "condition_Breast Neoplasms",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Sun Yat-Sen Memorial Hospital of Sun Yat-Sen University",
+              "target": "condition_HER2-positive Breast Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Mayo Clinic",
+              "target": "condition_Breast Neoplasms",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_National Cancer Institute (NCI)",
+              "target": "condition_Ovarian Cancer",
+              "weight": 3.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Case Comprehensive Cancer Center",
+              "target": "condition_Lung Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Northwestern University",
+              "target": "condition_Breast Cancer Female",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Alliance for Clinical Trials in Oncology",
+              "target": "condition_Breast Carcinoma",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_National Cancer Institute (NCI)",
+              "target": "condition_Breast Carcinoma",
+              "weight": 3.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_AstraZeneca",
+              "target": "condition_Breast Neoplasm",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Washington University School of Medicine",
+              "target": "condition_Breast Carcinoma",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Northwestern University",
+              "target": "condition_Breast Neoplasm",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_National Cancer Institute (NCI)",
+              "target": "condition_Anatomic Stage I Breast Cancer AJCC v8",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Fudan University",
+              "target": "condition_Breast Cancer Female",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_City of Hope Medical Center",
+              "target": "condition_Breast Neoplasms",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Memorial Sloan Kettering Cancer Center",
+              "target": "condition_Triple Negative Breast Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Novartis Pharmaceuticals",
+              "target": "condition_Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Dana-Farber Cancer Institute",
+              "target": "condition_Breast Cancer Female",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Dana-Farber Cancer Institute",
+              "target": "condition_Advanced Breast Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Dana-Farber Cancer Institute",
+              "target": "condition_Breast Neoplasms",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Washington University School of Medicine",
+              "target": "condition_Lung Cancer",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_AstraZeneca",
+              "target": "condition_Breast Neoplasms",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Fudan University",
+              "target": "condition_Breast Neoplasms",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Hoffmann-La Roche",
+              "target": "condition_HER2-positive Breast Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Sun Yat-Sen Memorial Hospital of Sun Yat-Sen University",
+              "target": "condition_Breast Cancer Female",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Hoffmann-La Roche",
+              "target": "condition_Triple Negative Breast Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Sun Yat-Sen Memorial Hospital of Sun Yat-Sen University",
+              "target": "condition_Advanced Breast Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Sun Yat-Sen Memorial Hospital of Sun Yat-Sen University",
+              "target": "condition_Metastatic Breast Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Fudan University",
+              "target": "condition_Breast Neoplasm",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Novartis Pharmaceuticals",
+              "target": "condition_Lung Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_M.D. Anderson Cancer Center",
+              "target": "condition_Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Case Comprehensive Cancer Center",
+              "target": "condition_Lymphedema",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Memorial Sloan Kettering Cancer Center",
+              "target": "condition_Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_AstraZeneca",
+              "target": "condition_Ovarian Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Dana-Farber Cancer Institute",
+              "target": "condition_Lung Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Fudan University",
+              "target": "condition_Breast Carcinoma",
+              "weight": 2.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Memorial Sloan Kettering Cancer Center",
+              "target": "condition_Ovarian Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Case Comprehensive Cancer Center",
+              "target": "condition_Advanced Breast Cancer",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_Memorial Sloan Kettering Cancer Center",
+              "target": "condition_Breast Neoplasms",
+              "weight": 1.0,
+              "label": null
+            },
+            {
+              "source": "sponsor_University of Washington",
+              "target": "condition_Breast Carcinoma",
+              "weight": 1.0,
+              "label": null
+            }
+          ],
+          "node_color_by": "type",
+          "edge_weight_label": "Number of co-occurring trials"
+        },
+        "data": [],
+        "x_axis_label": null,
+        "y_axis_label": null,
+        "color_scheme": null
+      },
+      "meta": {
+        "query_interpretation": "A network graph is appropriate to illustrate relationships between sponsors and conditions in breast cancer trials.",
+        "filters_applied": {
+          "condition": "breast cancer"
+        },
+        "total_trials_retrieved": 5000,
+        "assumptions": [
+          "Network limited to top 20 sponsors and 15 conditions by connectivity."
+        ],
+        "tool_calls_made": 3,
+        "source": "clinicaltrials.gov"
+      },
+      "plan": {
+        "intent": "network",
+        "viz_type": "network_graph",
+        "filters": {
+          "drug_name": null,
+          "condition": "breast cancer",
+          "trial_phase": null,
+          "sponsor": null,
+          "country": null,
+          "start_year": null,
+          "end_year": null,
+          "secondary_drug": null,
+          "secondary_condition": null
+        },
+        "aggregation_field": "sponsor_name",
+        "reasoning": "A network graph is appropriate to illustrate relationships between sponsors and conditions in breast cancer trials.",
+        "requires_multiple_searches": false
+      },
+      "error": null
+    }
+  }
+]
